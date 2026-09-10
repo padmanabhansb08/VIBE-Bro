@@ -22,14 +22,14 @@ Every skill follows the same principles:
 ## Installation
 
 ```bash
-git clone https://github.com/aakashdhar/vibe-skill.git /tmp/vibe-skill && mv /tmp/vibe-skill/vibe-* ~/.claude/skills/ && rm -rf /tmp/vibe-skill
+git clone https://github.com/padmanabhansb08/VIBE-Bro.git /tmp/vibe-skill && mv /tmp/vibe-skill/vibe-* ~/.claude/skills/ && rm -rf /tmp/vibe-skill
 ```
 
 Restart Claude Code. All 26 skills are active immediately.
 
 **Update skills anytime:**
 ```bash
-cd /tmp && git clone https://github.com/aakashdhar/vibe-skill.git && mv /tmp/vibe-skill/vibe-* ~/.claude/skills/ && rm -rf /tmp/vibe-skill
+cd /tmp && git clone https://github.com/padmanabhansb08/VIBE-Bro.git && mv /tmp/vibe-skill/vibe-* ~/.claude/skills/ && rm -rf /tmp/vibe-skill
 ```
 
 ## Usage
