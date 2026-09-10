@@ -2,8 +2,6 @@
 
 > A framework of 27 Claude Code skills that covers the complete software development lifecycle — from first idea to client sign-off.
 
-Built by **Aakash Dhar** at [BetaCraft](https://betacraft.in) for production AI-assisted development workflows.
-
 ---
 
 ## What this is
@@ -506,7 +504,7 @@ CP-GAP   Tracking gap — sessions run without cost tracking
 handoff: client       →  Non-technical client stakeholder
 handoff: milestone    →  Client + PM, end of a phase
 handoff: dev          →  Developer taking over the codebase
-handoff: internal     →  BetaCraft team member handoff
+handoff: internal     →  Internal team member handoff
 handoff: maintenance  →  Client's own technical team
 ```
 
@@ -620,4 +618,4 @@ Issues, suggestions, and skill contributions welcome — skills are just markdow
 
 ## License
 
-MIT — use freely, attribution appreciated.
+MIT License
