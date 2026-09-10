@@ -17,15 +17,15 @@
       --bg-card: rgba(16, 23, 38, 0.7);
       --bg-card-hover: rgba(23, 32, 54, 0.85);
       --border-subtle: rgba(255, 255, 255, 0.08);
-      --border-accent: rgba(99, 102, 241, 0.3);
+      --border-accent: rgba(56, 189, 248, 0.35);
       --text-main: #f1f5f9;
       --text-muted: #94a3b8;
       --text-dim: #64748b;
       
-      --primary: #6366f1;
-      --primary-glow: rgba(99, 102, 241, 0.25);
-      --accent-cyan: #06b6d4;
-      --accent-cyan-glow: rgba(6, 182, 212, 0.2);
+      --primary: #38bdf8;
+      --primary-glow: rgba(56, 189, 248, 0.28);
+      --accent-cyan: #0ea5e9;
+      --accent-cyan-glow: rgba(14, 165, 233, 0.25);
       --accent-amber: #f59e0b;
       --accent-emerald: #10b981;
       --accent-rose: #f43f5e;
@@ -34,8 +34,8 @@
       --font-display: 'Space Grotesk', sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
       
-      --glow-purple: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.18) 0%, transparent 60%);
-      --glow-cyan: radial-gradient(circle at 100% 50%, rgba(6, 182, 212, 0.12) 0%, transparent 50%);
+      --glow-blue: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.2) 0%, transparent 60%);
+      --glow-cyan: radial-gradient(circle at 100% 50%, rgba(14, 165, 233, 0.15) 0%, transparent 50%);
     }
 
     * {
@@ -53,8 +53,8 @@
       overflow-x: hidden;
       min-height: 100vh;
       background-image: 
-        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.25), transparent),
-        radial-gradient(ellipse 60% 40% at 100% 40%, rgba(6, 182, 212, 0.12), transparent);
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(56, 189, 248, 0.22), transparent),
+        radial-gradient(ellipse 60% 40% at 100% 40%, rgba(14, 165, 233, 0.12), transparent);
     }
 
     /* Ambient animated grid */
@@ -111,14 +111,19 @@
 
     .brand-name {
       font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 20px;
-      letter-spacing: -0.5px;
+      font-weight: 800;
+      font-size: 28px;
+      letter-spacing: -0.75px;
       color: #fff;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .brand-name:hover {
+      transform: scale(1.02);
     }
 
     .brand-name span {
-      background: linear-gradient(135deg, #a5b4fc, #38bdf8);
+      background: linear-gradient(135deg, #7dd3fc, #38bdf8);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -184,37 +189,6 @@
       align-items: center;
     }
 
-    .badge-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 16px;
-      border-radius: 100px;
-      background: rgba(99, 102, 241, 0.1);
-      border: 1px solid rgba(99, 102, 241, 0.3);
-      color: #c7d2fe;
-      font-size: 12px;
-      font-family: var(--font-mono);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 24px;
-      box-shadow: 0 0 24px rgba(99, 102, 241, 0.2);
-    }
-
-    .badge-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--accent-cyan);
-      box-shadow: 0 0 10px var(--accent-cyan);
-      animation: pulseDot 2s infinite ease-in-out;
-    }
-
-    @keyframes pulseDot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.85); }
-    }
-
     .hero-title {
       font-family: var(--font-display);
       font-size: clamp(48px, 8vw, 84px);
@@ -226,7 +200,7 @@
     }
 
     .hero-title .gradient-text {
-      background: linear-gradient(135deg, #ffffff 30%, #818cf8 70%, #38bdf8 100%);
+      background: linear-gradient(135deg, #ffffff 30%, #38bdf8 70%, #0284c7 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -245,7 +219,7 @@
       width: 100%;
       max-width: 860px;
       background: #090d16;
-      border: 1px solid rgba(99, 102, 241, 0.25);
+      border: 1px solid rgba(56, 189, 248, 0.25);
       border-radius: 16px;
       overflow: hidden;
       box-shadow: 
@@ -287,9 +261,9 @@
     }
 
     .btn-copy-install {
-      background: rgba(99, 102, 241, 0.15);
-      border: 1px solid rgba(99, 102, 241, 0.35);
-      color: #c7d2fe;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: #bae6fd;
       padding: 5px 12px;
       border-radius: 6px;
       font-family: var(--font-mono);
@@ -304,7 +278,7 @@
 
     .btn-copy-install:hover {
       background: var(--primary);
-      color: #fff;
+      color: #04101e;
       box-shadow: 0 0 15px var(--primary-glow);
     }
 
@@ -464,7 +438,7 @@
 
     .sim-input-box:focus-within {
       border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
     }
 
     .sim-prefix {
@@ -486,20 +460,20 @@
     }
 
     .sim-btn {
-      background: linear-gradient(135deg, var(--primary), #4f46e5);
+      background: linear-gradient(135deg, var(--primary), #0284c7);
       border: none;
-      color: #fff;
+      color: #04101e;
       padding: 10px 20px;
       border-radius: 8px;
       font-family: var(--font-mono);
-      font-weight: 600;
+      font-weight: 700;
       font-size: 13px;
       cursor: pointer;
       transition: all 0.2s;
     }
 
     .sim-btn:hover {
-      opacity: 0.9;
+      opacity: 0.95;
       box-shadow: 0 0 20px var(--primary-glow);
     }
 
@@ -523,8 +497,8 @@
     }
 
     .sim-chip:hover {
-      background: rgba(99, 102, 241, 0.15);
-      border-color: rgba(99, 102, 241, 0.4);
+      background: rgba(56, 189, 248, 0.15);
+      border-color: rgba(56, 189, 248, 0.4);
       color: #fff;
       transform: translateY(-1px);
     }
@@ -557,8 +531,8 @@
     }
 
     .sim-phase-tag {
-      background: rgba(99, 102, 241, 0.15);
-      color: #a5b4fc;
+      background: rgba(56, 189, 248, 0.15);
+      color: #7dd3fc;
       padding: 4px 10px;
       border-radius: 6px;
       font-family: var(--font-mono);
@@ -643,7 +617,7 @@
 
     .search-input:focus {
       border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
     }
 
     .skills-grid {
@@ -680,7 +654,7 @@
 
     .skill-card:hover {
       background: var(--bg-card-hover);
-      border-color: rgba(99, 102, 241, 0.4);
+      border-color: rgba(56, 189, 248, 0.45);
       transform: translateY(-4px);
       box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.7);
     }
@@ -858,7 +832,7 @@
 
     .phase-tile.active, .phase-tile:hover {
       border-color: var(--primary);
-      background: rgba(99, 102, 241, 0.12);
+      background: rgba(56, 189, 248, 0.14);
       transform: translateY(-2px);
     }
 
@@ -960,7 +934,6 @@
   <!-- NAVIGATION -->
   <nav>
     <a href="#" class="nav-brand">
-      <div class="brand-symbol">V*</div>
       <div class="brand-name">VIBE-<span>Bro</span></div>
     </a>
     <div class="nav-links">
@@ -980,10 +953,6 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="badge-pill">
-      <span class="badge-dot"></span>
-      Autonomous Agent Framework
-    </div>
     <h1 class="hero-title">
       Engineering with <span class="gradient-text">Deterministic Precision</span>
     </h1>
@@ -1150,7 +1119,7 @@
         Deterministic agentic software development framework for Claude Code, Antigravity, and autonomous LLM workflows.
       </div>
       <div class="footer-badge">
-        Maintained under MIT License · <a href="https://github.com/padmanabhansb08/VIBE-Bro" style="color:#818cf8;text-decoration:none;">padmanabhansb08/VIBE-Bro</a>
+        Maintained under MIT License · <a href="https://github.com/padmanabhansb08/VIBE-Bro" style="color:#38bdf8;text-decoration:none;">padmanabhansb08/VIBE-Bro</a>
       </div>
     </div>
   </footer>

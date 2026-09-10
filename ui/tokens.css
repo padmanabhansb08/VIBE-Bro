@@ -1,0 +1,84 @@
+/* ==========================================================================
+   Transitions.dev — Core Motion Tokens & Design Variables
+   Source: https://transitions.dev
+   ========================================================================== */
+
+:root {
+  color-scheme: light dark;
+
+  /* Durations */
+  --duration-stagger:   40ms;   /* per-item stagger offset */
+  --duration-micro:     80ms;   /* tooltip/path delay, shake segment, large stagger */
+  --duration-quick:     150ms;  /* modal/dropdown close, text swap, tooltip appear */
+  --duration-fast:      250ms;  /* icon swap, dropdown/modal open, tabs sliding, page slide */
+  --duration-medium:    350ms;  /* panel close, toast close */
+  --duration-slow:      400ms;  /* panel open, skeleton content reveal, input clear */
+  --duration-very-slow: 500ms;  /* emphasis moments, badge appear, text reveal, success check */
+
+  /* Easings */
+  --ease-smooth-out:    cubic-bezier(0.22, 1, 0.36, 1);   /* modal/dropdown/panel open + close, page slide, resize */
+  --ease-in-out:        ease-in-out;                      /* icon swap, text swap, text reveal, skeleton reveal */
+  --ease-out:           ease-out;                         /* tooltip open / close */
+  --ease-linear:        linear;                           /* shimmer, skeleton pulse, spinner */
+  --ease-bounce:        cubic-bezier(0.34, 1.36, 0.64, 1);   /* badge pop open */
+  --ease-bounce-strong: cubic-bezier(0.34, 3.85, 0.64, 1);   /* bouncy hover-out */
+
+  /* Distances */
+  --distance-micro:  4px;
+  --distance-small:  6px;
+  --distance-base:   8px;
+  --distance-medium: 12px;
+  --distance-large:  30px;
+
+  /* Scales */
+  --scale-large:  0.96;
+  --scale-medium: 0.97;
+  --scale-small:  0.98;
+  --scale-tiny:   0.99;
+
+  /* Blur */
+  --blur-small:  2px;
+  --blur-medium: 3px;
+  --blur-large:  8px;
+
+  /* Theme Tokens (Light Mode Defaults) */
+  --bg: #fdfdfd;
+  --text: #0d0d0d;
+  --text-muted: #6c6c6c;
+  --skeleton: #eeeeef;
+  --material-bg: #ffffff;
+  --material-shadow:
+    0 4px 42px 0 rgba(0, 0, 0, 0.06),
+    0 2px 6px 0 rgba(0, 0, 0, 0.05),
+    0 0 0 1px rgba(0, 0, 0, 0.06);
+
+  /* Prototype 4: Card Resize Specific Knobs */
+  --p4-dur: 300ms;
+  --p4-ease: var(--ease-smooth-out);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d0d0e;
+    --text: #f5f5f5;
+    --text-muted: #a1a1aa;
+    --skeleton: #27272a;
+    --material-bg: #18181b;
+    --material-shadow:
+      0 4px 42px 0 rgba(0, 0, 0, 0.45),
+      0 2px 6px 0 rgba(0, 0, 0, 0.35),
+      0 0 0 1px rgba(255, 255, 255, 0.08);
+  }
+}
+
+html[data-theme="dark"] {
+  --bg: #0d0d0e;
+  --text: #f5f5f5;
+  --text-muted: #a1a1aa;
+  --skeleton: #27272a;
+  --material-bg: #18181b;
+  --material-shadow:
+    0 4px 42px 0 rgba(0, 0, 0, 0.45),
+    0 2px 6px 0 rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.08);
+}

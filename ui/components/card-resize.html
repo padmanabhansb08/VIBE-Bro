@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Card Resize Component — Transitions.dev (Free Component)</title>
+  <link rel="stylesheet" href="../tokens.css" />
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text);
+      gap: 24px;
+    }
+
+    .demo-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      padding: 40px;
+      background: rgba(125, 125, 125, 0.05);
+      border-radius: 20px;
+      border: 1px solid rgba(125, 125, 125, 0.1);
+    }
+
+    /* ─── Prototype 4 — Card Resize ──────────────────────────── */
+    .p4-card {
+      width: 220px;
+      height: 112px;
+      background: var(--material-bg);
+      border-radius: 12px;
+      box-shadow: var(--material-shadow);
+      position: relative;
+      overflow: hidden;
+      transition:
+        width var(--p4-dur) var(--p4-ease),
+        height var(--p4-dur) var(--p4-ease);
+      will-change: width, height;
+    }
+
+    .p4-card.is-small {
+      width: 154px;
+      height: 128px;
+    }
+
+    /* Skeleton lines */
+    .p4-card .sk {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      background: var(--skeleton);
+      border-radius: 4px;
+    }
+
+    .p4-card .sk-1 {
+      top: 14px;
+      height: 10px;
+      right: auto;
+      width: calc((100% - 28px) * 0.526);
+    }
+
+    .p4-card .sk-2 {
+      top: 28px;
+      height: 7px;
+    }
+
+    .p4-card .sk-3 {
+      top: 39px;
+      height: 7px;
+    }
+
+    .p4-card .sk-4 {
+      top: 50px;
+      height: 7px;
+      right: auto;
+      width: calc((100% - 28px) * 0.734);
+    }
+
+    .p4-card .sk-5 {
+      top: 78px;
+      height: 7px;
+    }
+
+    .p4-card .sk-6 {
+      top: 89px;
+      height: 7px;
+    }
+
+    /* Action button */
+    .btn-animate {
+      appearance: none;
+      border: 1px solid rgba(125, 125, 125, 0.2);
+      border-radius: 9999px;
+      background: var(--material-bg);
+      color: var(--text);
+      padding: 8px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: all 150ms ease;
+    }
+
+    .btn-animate:hover {
+      background: rgba(125, 125, 125, 0.1);
+      transform: translateY(-1px);
+    }
+
+    .btn-animate:active {
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .p4-card {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-container">
+    <div class="p4-card" id="card-resize-target" data-proto-resize>
+      <div class="sk sk-1"></div>
+      <div class="sk sk-2"></div>
+      <div class="sk sk-3"></div>
+      <div class="sk sk-4"></div>
+      <div class="sk sk-5"></div>
+      <div class="sk sk-6"></div>
+    </div>
+    <button type="button" class="btn-animate" id="btn-toggle">Animate (Toggle Size)</button>
+  </div>
+
+  <script>
+    const card = document.getElementById("card-resize-target");
+    const btn = document.getElementById("btn-toggle");
+
+    btn.addEventListener("click", () => {
+      card.classList.toggle("is-small");
+    });
+  </script>
+</body>
+</html>
