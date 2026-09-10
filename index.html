@@ -4,1671 +4,1176 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>vibe-* — Claude Code Skills Framework</title>
+  <title>VIBE-Bro — Autonomous Engineering &amp; AI-Agentic Skills Matrix</title>
+  <meta name="description" content="26 hyper-specialized autonomous Claude Code & Antigravity skills. Spec-driven development, architectural governance, and multi-agent systems.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
   <style>
-    *,
-    *::before,
-    *::after {
+    :root {
+      --bg-base: #07090e;
+      --bg-surface: #0d121c;
+      --bg-card: rgba(16, 23, 38, 0.7);
+      --bg-card-hover: rgba(23, 32, 54, 0.85);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(99, 102, 241, 0.3);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      
+      --primary: #6366f1;
+      --primary-glow: rgba(99, 102, 241, 0.25);
+      --accent-cyan: #06b6d4;
+      --accent-cyan-glow: rgba(6, 182, 212, 0.2);
+      --accent-amber: #f59e0b;
+      --accent-emerald: #10b981;
+      --accent-rose: #f43f5e;
+      
+      --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      
+      --glow-purple: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.18) 0%, transparent 60%);
+      --glow-cyan: radial-gradient(circle at 100% 50%, rgba(6, 182, 212, 0.12) 0%, transparent 50%);
+    }
+
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-
-    :root {
-      --orange: #FF6600;
-      --black: #111111;
-      --white: #FFFFFF;
-      --off: #F7F7F7;
-      --font-display: 'Bebas Neue', sans-serif;
-      --font-mono: 'Space Mono', monospace;
-      --font-body: 'DM Sans', sans-serif;
-    }
-
-    html {
       scroll-behavior: smooth;
     }
 
     body {
-      background: var(--white);
-      color: var(--black);
-      font-family: var(--font-body);
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      font-family: var(--font-main);
+      line-height: 1.6;
       overflow-x: hidden;
-      cursor: crosshair;
+      min-height: 100vh;
+      background-image: 
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.25), transparent),
+        radial-gradient(ellipse 60% 40% at 100% 40%, rgba(6, 182, 212, 0.12), transparent);
     }
 
-    /* NAV */
+    /* Ambient animated grid */
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* NAVIGATION */
     nav {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      z-index: 200;
-      background: var(--black);
+      height: 72px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 48px;
-      height: 56px;
-      border-bottom: 3px solid var(--orange);
+      padding: 0 40px;
+      background: rgba(7, 9, 14, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+      z-index: 100;
     }
 
-    .nav-logo {
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-symbol {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--primary), var(--accent-cyan));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 18px;
+      box-shadow: 0 0 20px var(--primary-glow);
+    }
+
+    .brand-name {
       font-family: var(--font-display);
-      font-size: 24px;
-      color: var(--white);
-      letter-spacing: 0.05em;
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: -0.5px;
+      color: #fff;
     }
 
-    .nav-logo span {
-      color: var(--orange);
+    .brand-name span {
+      background: linear-gradient(135deg, #a5b4fc, #38bdf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .nav-links {
       display: flex;
-      gap: 36px;
+      gap: 32px;
+      align-items: center;
     }
 
-    .nav-links a {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: rgba(255, 255, 255, 0.4);
+    .nav-link {
+      color: var(--text-muted);
       text-decoration: none;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      transition: color 0.15s;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s, transform 0.2s;
     }
 
-    .nav-links a:hover {
-      color: var(--orange);
+    .nav-link:hover {
+      color: #fff;
+      transform: translateY(-1px);
     }
 
-    .nav-cta {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      font-weight: 700;
-      background: var(--orange);
-      color: var(--black);
-      padding: 10px 20px;
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .btn-github {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: #fff;
       text-decoration: none;
-      transition: all 0.15s;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .nav-cta:hover {
-      background: var(--white);
+    .btn-github:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      transform: translateY(-1px);
     }
 
-    /* HERO */
+    /* HERO SECTION */
     .hero {
-      min-height: 100vh;
-      padding: 130px 48px 80px;
+      position: relative;
+      z-index: 1;
+      padding: 160px 24px 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      position: relative;
-      border-bottom: 4px solid var(--black);
-      overflow: hidden;
-      background: var(--white);
+      align-items: center;
     }
 
-    .hero-eyebrow {
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 100px;
+      background: rgba(99, 102, 241, 0.1);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      color: #c7d2fe;
+      font-size: 12px;
       font-family: var(--font-mono);
-      font-size: 13px;
-      color: rgba(0, 0, 0, 0.35);
-      letter-spacing: 0.15em;
       text-transform: uppercase;
-      margin-bottom: 16px;
-      opacity: 0;
-      animation: fadeUp 0.6s ease 0.1s forwards;
+      letter-spacing: 0.08em;
+      margin-bottom: 24px;
+      box-shadow: 0 0 24px rgba(99, 102, 241, 0.2);
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent-cyan);
+      box-shadow: 0 0 10px var(--accent-cyan);
+      animation: pulseDot 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
     }
 
     .hero-title {
       font-family: var(--font-display);
-      font-size: clamp(100px, 16vw, 200px);
-      line-height: 0.9;
-      color: var(--black);
-      letter-spacing: -3px;
-      margin-bottom: 16px;
-      opacity: 0;
-      animation: fadeUp 0.6s ease 0.2s forwards;
+      font-size: clamp(48px, 8vw, 84px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+      max-width: 960px;
     }
 
-    .hero-title .accent {
-      color: var(--orange);
+    .hero-title .gradient-text {
+      background: linear-gradient(135deg, #ffffff 30%, #818cf8 70%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    .hero-subtitle {
-      font-size: 20px;
-      font-weight: 300;
-      color: rgba(0, 0, 0, 0.5);
-      max-width: 520px;
+    .hero-desc {
+      font-size: clamp(17px, 2.2vw, 21px);
+      color: var(--text-muted);
+      max-width: 680px;
       line-height: 1.6;
       margin-bottom: 48px;
-      opacity: 0;
-      animation: fadeUp 0.6s ease 0.3s forwards;
+      font-weight: 400;
     }
 
-    /* TERMINAL */
-    .terminal-block {
-      background: var(--black);
-      max-width: 780px;
-      opacity: 0;
-      animation: fadeUp 0.6s ease 0.4s forwards;
+    /* TERMINAL CONTAINER */
+    .terminal-wrapper {
+      width: 100%;
+      max-width: 860px;
+      background: #090d16;
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 
+        0 20px 50px -10px rgba(0, 0, 0, 0.8),
+        0 0 40px -15px var(--primary-glow);
+      margin-bottom: 40px;
+      text-align: left;
       position: relative;
-      margin-bottom: 16px;
     }
 
-    .terminal-bar {
-      background: #1c1c1c;
+    .terminal-header {
+      background: rgba(16, 24, 40, 0.9);
+      border-bottom: 1px solid var(--border-subtle);
       padding: 12px 18px;
       display: flex;
       align-items: center;
-      gap: 8px;
-      border-bottom: 1px solid #2a2a2a;
+      justify-content: space-between;
     }
 
-    .terminal-dot {
-      width: 13px;
-      height: 13px;
-      border-radius: 50%;
-    }
-
-    .terminal-dot.red {
-      background: #ff5f57;
-    }
-
-    .terminal-dot.yellow {
-      background: #ffbd2e;
-    }
-
-    .terminal-dot.green {
-      background: #28c840;
-    }
-
-    .terminal-title {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: rgba(255, 255, 255, 0.25);
-      margin: 0 auto;
-    }
-
-    .terminal-body {
-      padding: 24px 28px;
-    }
-
-    .terminal-line {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.4);
-      margin-bottom: 8px;
-      line-height: 1.7;
-    }
-
-    .terminal-line .prompt {
-      color: var(--orange);
-    }
-
-    .terminal-line .cmd {
-      color: var(--white);
-    }
-
-    .terminal-line .out {
-      color: rgba(255, 255, 255, 0.3);
-    }
-
-    .terminal-line .success {
-      color: #28c840;
-    }
-
-    .terminal-cursor {
-      display: inline-block;
-      width: 9px;
-      height: 16px;
-      background: var(--orange);
-      animation: blink 1s step-end infinite;
-      vertical-align: text-bottom;
-    }
-
-    @keyframes blink {
-
-      0%,
-      100% {
-        opacity: 1
-      }
-
-      50% {
-        opacity: 0
-      }
-    }
-
-    .copy-btn {
-      position: absolute;
-      top: 48px;
-      right: 14px;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 700;
-      background: var(--orange);
-      color: var(--black);
-      border: none;
-      padding: 8px 14px;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-
-    .copy-btn:hover {
-      background: var(--white);
-    }
-
-    .copy-btn.copied {
-      background: #28c840;
-      color: var(--white);
-    }
-
-    .hero-tags {
+    .terminal-dots {
       display: flex;
       gap: 8px;
-      flex-wrap: wrap;
-      opacity: 0;
-      animation: fadeUp 0.6s ease 0.5s forwards;
     }
 
-    .tag {
+    .t-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+    }
+    .t-dot.red { background: #ef4444; }
+    .t-dot.yellow { background: #f59e0b; }
+    .t-dot.green { background: #10b981; }
+
+    .terminal-title-text {
       font-family: var(--font-mono);
-      font-size: 13px;
-      font-weight: 700;
-      background: var(--black);
-      color: var(--orange);
-      padding: 7px 16px;
-      cursor: default;
-      transition: all 0.15s;
+      font-size: 12px;
+      color: var(--text-dim);
+      font-weight: 500;
     }
 
-    .tag:hover {
-      background: var(--orange);
-      color: var(--black);
+    .btn-copy-install {
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      color: #c7d2fe;
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
     }
 
-    .hero-deco {
-      position: absolute;
-      right: -20px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-family: var(--font-display);
-      font-size: 380px;
-      color: rgba(0, 0, 0, 0.03);
-      pointer-events: none;
-      line-height: 1;
+    .btn-copy-install:hover {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 0 15px var(--primary-glow);
+    }
+
+    .terminal-screen {
+      padding: 24px;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      line-height: 1.8;
+      min-height: 140px;
+      background: #080c14;
+    }
+
+    .t-line {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 6px;
+      word-break: break-all;
+    }
+
+    .t-prompt {
+      color: var(--accent-cyan);
+      margin-right: 12px;
       user-select: none;
     }
 
-    /* STATS */
-    .stats-bar {
-      background: var(--black);
-      display: flex;
-      border-bottom: 4px solid var(--orange);
+    .t-cmd {
+      color: #f1f5f9;
     }
 
-    .stat-item {
-      flex: 1;
-      padding: 32px 36px;
-      border-right: 1px solid rgba(255, 102, 0, 0.15);
-      transition: background 0.2s;
-      cursor: default;
-    }
-
-    .stat-item:last-child {
-      border-right: none;
-    }
-
-    .stat-item:hover {
-      background: rgba(255, 102, 0, 0.06);
-    }
-
-    .stat-num {
-      font-family: var(--font-display);
-      font-size: 64px;
-      color: var(--orange);
-      line-height: 1;
-      display: block;
-    }
-
-    .stat-num.w {
-      color: var(--white);
-    }
-
-    .stat-label {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: rgba(255, 255, 255, 0.3);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-top: 4px;
-      display: block;
-    }
-
-    /* TRIGGER DEMO */
-    .trigger-section {
-      background: var(--off);
-      border-bottom: 4px solid var(--black);
-      padding: 72px 48px;
-    }
-
-    .section-title {
-      font-family: var(--font-display);
-      font-size: 72px;
-      color: var(--black);
-      line-height: 1;
-      margin-bottom: 12px;
-    }
-
-    .section-sub {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      color: rgba(0, 0, 0, 0.4);
-      margin-bottom: 36px;
-    }
-
-    .trigger-input-wrap {
-      display: flex;
-      align-items: stretch;
-      border: 3px solid var(--black);
-      max-width: 640px;
-      margin-bottom: 20px;
-    }
-
-    .trigger-prefix {
-      font-family: var(--font-mono);
-      font-size: 16px;
-      font-weight: 700;
-      background: var(--black);
-      color: var(--orange);
-      padding: 16px 18px;
-      display: flex;
-      align-items: center;
-    }
-
-    .trigger-input {
-      font-family: var(--font-mono);
-      font-size: 15px;
-      border: none;
-      outline: none;
-      padding: 16px 18px;
-      flex: 1;
-      background: var(--white);
-      color: var(--black);
-      cursor: text;
-    }
-
-    .trigger-go {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      font-weight: 700;
-      background: var(--orange);
-      color: var(--black);
-      border: none;
-      padding: 16px 22px;
-      cursor: pointer;
-      border-left: 2px solid var(--black);
-      transition: all 0.15s;
-    }
-
-    .trigger-go:hover {
-      background: var(--black);
-      color: var(--orange);
-    }
-
-    .trigger-chips {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 28px;
-    }
-
-    .trigger-chip {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      background: var(--white);
-      border: 1.5px solid rgba(0, 0, 0, 0.15);
-      padding: 7px 14px;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-
-    .trigger-chip:hover {
-      background: var(--black);
-      color: var(--orange);
-      border-color: var(--black);
-    }
-
-    .trigger-result {
-      background: var(--black);
-      padding: 28px 32px;
-      display: none;
-    }
-
-    .trigger-result.visible {
-      display: block;
-    }
-
-    .tr-phase {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: rgba(255, 102, 0, 0.5);
-      margin-bottom: 8px;
-    }
-
-    .tr-name {
-      font-family: var(--font-display);
-      font-size: 48px;
-      color: var(--orange);
-      margin-bottom: 12px;
-      line-height: 1;
-    }
-
-    .tr-desc {
-      font-size: 15px;
-      color: rgba(255, 255, 255, 0.55);
-      line-height: 1.7;
-      max-width: 540px;
-    }
-
-    .tr-badge {
+    .t-cursor {
       display: inline-block;
-      background: var(--orange);
-      color: var(--black);
-      font-family: var(--font-mono);
-      font-size: 12px;
-      font-weight: 700;
-      padding: 5px 12px;
-      margin-top: 16px;
+      width: 8px;
+      height: 18px;
+      background: var(--accent-cyan);
+      margin-left: 4px;
+      animation: blink 1s step-end infinite;
+      vertical-align: middle;
     }
 
-    .trigger-no-match {
-      font-family: var(--font-mono);
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .t-log {
+      color: var(--text-dim);
+      padding-left: 20px;
       font-size: 13px;
-      color: rgba(0, 0, 0, 0.4);
-      padding: 20px 0;
-      display: none;
     }
 
-    .trigger-no-match.visible {
-      display: block;
+    .t-success {
+      color: var(--accent-emerald);
+      font-weight: 600;
+      padding-left: 20px;
+      font-size: 13px;
     }
 
-    /* SKILLS */
-    .skills-section {
-      padding: 72px 48px;
-      border-bottom: 4px solid var(--black);
-      background: var(--white);
-    }
-
-    .skills-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      margin-bottom: 28px;
-      flex-wrap: wrap;
+    /* METRIC COUNTERS */
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
       gap: 20px;
+      width: 100%;
+      max-width: 1000px;
+      margin-top: 10px;
     }
 
-    .search-wrap {
-      position: relative;
+    .metric-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 22px 18px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .skills-search {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      border: 2px solid var(--black);
-      padding: 12px 44px 12px 16px;
-      background: var(--white);
-      outline: none;
-      width: 240px;
-      cursor: text;
+    .metric-card:hover {
+      border-color: var(--border-accent);
+      background: var(--bg-card-hover);
+      transform: translateY(-3px);
     }
 
-    .skills-search:focus {
-      border-color: var(--orange);
-    }
-
-    .search-clear {
-      position: absolute;
-      right: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      font-size: 18px;
-      cursor: pointer;
-      color: rgba(0, 0, 0, 0.35);
-      display: none;
-    }
-
-    .search-clear.visible {
+    .metric-val {
+      font-family: var(--font-display);
+      font-size: 38px;
+      font-weight: 700;
+      color: #fff;
       display: block;
+      margin-bottom: 4px;
+      background: linear-gradient(135deg, #fff 40%, var(--primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    .filter-tabs {
-      display: flex;
-      border: 2px solid var(--black);
-      margin-bottom: 20px;
-      flex-wrap: wrap;
+    .metric-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
-    .filter-tab {
+    /* TRIGGER SIMULATOR */
+    .section-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .section-tag {
       font-family: var(--font-mono);
       font-size: 12px;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .section-h2 {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 5vw, 44px);
       font-weight: 700;
-      padding: 10px 18px;
+      color: #fff;
+      letter-spacing: -1px;
+    }
+
+    .sim-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 860px;
+      margin: 0 auto;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .sim-input-box {
+      display: flex;
+      gap: 12px;
+      background: #090d16;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 8px 12px;
+      align-items: center;
+      margin-bottom: 24px;
+      transition: border-color 0.2s;
+    }
+
+    .sim-input-box:focus-within {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+    }
+
+    .sim-prefix {
+      font-family: var(--font-mono);
+      color: var(--accent-cyan);
+      font-weight: 700;
+      font-size: 18px;
+      padding-left: 6px;
+    }
+
+    .sim-input {
+      flex: 1;
       background: transparent;
       border: none;
-      border-right: 1px solid var(--black);
+      outline: none;
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 15px;
+    }
+
+    .sim-btn {
+      background: linear-gradient(135deg, var(--primary), #4f46e5);
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 13px;
       cursor: pointer;
-      letter-spacing: 0.06em;
+      transition: all 0.2s;
+    }
+
+    .sim-btn:hover {
+      opacity: 0.9;
+      box-shadow: 0 0 20px var(--primary-glow);
+    }
+
+    .chips-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .sim-chip {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-family: var(--font-mono);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .sim-chip:hover {
+      background: rgba(99, 102, 241, 0.15);
+      border-color: rgba(99, 102, 241, 0.4);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .sim-result {
+      display: none;
+      background: #060910;
+      border-radius: 12px;
+      border-left: 4px solid var(--primary);
+      padding: 24px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .sim-result.active {
+      display: block;
+    }
+
+    .sim-meta-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .sim-skill-name {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .sim-phase-tag {
+      background: rgba(99, 102, 241, 0.15);
+      color: #a5b4fc;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
       text-transform: uppercase;
-      transition: all 0.15s;
-      color: var(--black);
+      font-weight: 600;
     }
 
-    .filter-tab:last-child {
-      border-right: none;
+    .sim-skill-desc {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 16px;
     }
 
-    .filter-tab.active,
-    .filter-tab:hover {
-      background: var(--black);
-      color: var(--orange);
-    }
-
-    .skills-count {
+    .sim-trigger-label {
       font-family: var(--font-mono);
       font-size: 12px;
-      color: rgba(0, 0, 0, 0.35);
-      margin-bottom: 20px;
+      color: var(--accent-cyan);
+      background: rgba(6, 182, 212, 0.08);
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 6px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* SKILLS MATRIX */
+    .filter-controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 8px 18px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .pill-btn:hover, .pill-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      box-shadow: 0 0 16px var(--primary-glow);
+    }
+
+    .search-box {
+      position: relative;
+      min-width: 280px;
+    }
+
+    .search-input {
+      width: 100%;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 10px 16px;
+      color: #fff;
+      font-size: 13px;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
     }
 
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      border: 2px solid var(--black);
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 20px;
     }
 
     .skill-card {
-      background: var(--white);
-      border-right: 1px solid rgba(0, 0, 0, 0.12);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-      padding: 22px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 24px;
+      backdrop-filter: blur(8px);
       cursor: pointer;
       position: relative;
       overflow: hidden;
-      transition: background 0.15s;
-    }
-
-    .skill-card:nth-child(3n) {
-      border-right: none;
-    }
-
-    .skill-card:hover {
-      background: var(--black);
-    }
-
-    .skill-card:hover .sk-cat {
-      color: rgba(255, 102, 0, 0.4) !important;
-    }
-
-    .skill-card:hover .sk-name {
-      color: var(--orange) !important;
-    }
-
-    .skill-card:hover .sk-trigger {
-      background: var(--orange) !important;
-      color: var(--black) !important;
-    }
-
-    .skill-card:hover .sk-desc {
-      color: rgba(255, 255, 255, 0.4) !important;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
     }
 
     .skill-card::before {
       content: '';
       position: absolute;
-      left: 0;
       top: 0;
-      bottom: 0;
-      width: 4px;
-      background: var(--orange);
-      transform: scaleY(0);
-      transition: transform 0.15s;
-      transform-origin: bottom;
-    }
-
-    .skill-card:hover::before {
-      transform: scaleY(1);
-    }
-
-    .sk-cat {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: rgba(0, 0, 0, 0.3);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    .sk-name {
-      font-family: var(--font-mono);
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--black);
-      margin-bottom: 8px;
-    }
-
-    .sk-trigger {
-      display: inline-block;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      background: var(--black);
-      color: var(--orange);
-      padding: 3px 10px;
-      margin-bottom: 10px;
-      font-weight: 700;
-    }
-
-    .sk-desc {
-      font-size: 13px;
-      color: rgba(0, 0, 0, 0.5);
-      line-height: 1.6;
-    }
-
-    .skill-card.hidden {
-      display: none;
-    }
-
-    .no-results {
-      grid-column: 1/-1;
-      padding: 60px;
-      text-align: center;
-      font-family: var(--font-mono);
-      font-size: 14px;
-      color: rgba(0, 0, 0, 0.3);
-      display: none;
-    }
-
-    .no-results.visible {
-      display: block;
-    }
-
-    /* DRAWER */
-    .drawer-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.65);
-      z-index: 300;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
       opacity: 0;
-      pointer-events: none;
       transition: opacity 0.3s;
     }
 
-    .drawer-overlay.open {
+    .skill-card:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(99, 102, 241, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.7);
+    }
+
+    .skill-card:hover::before {
       opacity: 1;
-      pointer-events: all;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .card-category {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-cyan);
+      font-weight: 600;
+    }
+
+    .card-trigger-chip {
+      background: rgba(255, 255, 255, 0.06);
+      padding: 3px 8px;
+      border-radius: 5px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #cbd5e1;
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 19px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .card-desc {
+      color: var(--text-muted);
+      font-size: 13.5px;
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 16px;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 12px;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* DRAWER DETAILS MODAL */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .drawer-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
     }
 
     .drawer {
       position: fixed;
-      right: 0;
       top: 0;
+      right: 0;
       bottom: 0;
-      width: 500px;
-      background: var(--white);
-      border-left: 4px solid var(--orange);
-      z-index: 301;
+      width: min(540px, 92vw);
+      background: #0b0f19;
+      border-left: 1px solid var(--border-accent);
+      z-index: 201;
       transform: translateX(100%);
-      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-      overflow-y: auto;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      box-shadow: -20px 0 60px rgba(0, 0, 0, 0.8);
     }
 
-    .drawer.open {
+    .drawer.active {
       transform: translateX(0);
     }
 
     .drawer-header {
-      background: var(--black);
-      padding: 56px 36px 32px;
-      border-bottom: 3px solid var(--orange);
-      position: sticky;
-      top: 0;
-      z-index: 1;
+      padding: 24px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     .drawer-close {
-      position: absolute;
-      top: 62px;
-      right: 24px;
-      background: var(--orange);
+      background: rgba(255, 255, 255, 0.06);
       border: none;
-      width: 36px;
-      height: 36px;
-      font-size: 20px;
+      color: #fff;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
       cursor: pointer;
-      font-weight: 700;
-      color: var(--black);
+      font-size: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: background 0.2s;
     }
 
-    .drawer-cat {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: rgba(255, 102, 0, 0.45);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
-    .drawer-name {
-      font-family: var(--font-display);
-      font-size: 52px;
-      color: var(--orange);
-      line-height: 1;
-      margin-bottom: 14px;
-    }
-
-    .drawer-trigger {
-      display: inline-block;
-      font-family: var(--font-mono);
-      font-size: 14px;
-      background: var(--orange);
-      color: var(--black);
-      padding: 5px 14px;
-      font-weight: 700;
+    .drawer-close:hover {
+      background: rgba(255, 255, 255, 0.15);
     }
 
     .drawer-body {
-      padding: 36px;
-    }
-
-    .drawer-section-title {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 700;
-      color: rgba(0, 0, 0, 0.3);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-      margin-top: 28px;
-    }
-
-    .drawer-desc {
-      font-size: 15px;
-      color: rgba(0, 0, 0, 0.65);
-      line-height: 1.8;
-    }
-
-    .drawer-example {
-      background: var(--black);
-      padding: 18px 22px;
-      margin-top: 8px;
-    }
-
-    .drawer-example code {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      color: var(--orange);
-      line-height: 2;
-      display: block;
-    }
-
-    /* LIFECYCLE */
-    .lifecycle-section {
-      background: var(--black);
-      padding: 72px 48px;
-      border-bottom: 4px solid var(--orange);
-    }
-
-    .lifecycle-section .section-title {
-      color: var(--orange);
-      margin-bottom: 48px;
-    }
-
-    .lifecycle-flow {
-      display: flex;
-      align-items: stretch;
-      overflow-x: auto;
-      padding-bottom: 8px;
-      border: 1.5px solid rgba(255, 102, 0, 0.2);
-    }
-
-    .lc-phase {
-      background: transparent;
       padding: 28px 24px;
-      min-width: 160px;
+      overflow-y: auto;
       flex: 1;
-      position: relative;
-      cursor: pointer;
-      transition: background 0.2s;
-      border-right: 1px solid rgba(255, 102, 0, 0.15);
     }
 
-    .lc-phase:last-child {
-      border-right: none;
-    }
-
-    .lc-phase:hover,
-    .lc-phase.active {
-      background: rgba(255, 102, 0, 0.08);
-    }
-
-    .lc-num {
-      font-family: var(--font-display);
-      font-size: 56px;
-      color: rgba(255, 102, 0, 0.12);
-      line-height: 1;
-      margin-bottom: 10px;
-    }
-
-    .lc-name {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--orange);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-
-    .lc-pill {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      background: rgba(255, 102, 0, 0.08);
-      color: rgba(255, 102, 0, 0.5);
-      padding: 4px 10px;
-      border: 1px solid rgba(255, 102, 0, 0.15);
-      margin-bottom: 5px;
-      display: block;
-      transition: all 0.15s;
-    }
-
-    .lc-phase:hover .lc-pill,
-    .lc-phase.active .lc-pill {
-      background: rgba(255, 102, 0, 0.18);
-      color: var(--orange);
-    }
-
-    .lc-detail {
-      margin-top: 32px;
-      background: rgba(255, 102, 0, 0.06);
-      border: 1.5px solid rgba(255, 102, 0, 0.2);
-      padding: 28px 32px;
-      display: none;
-    }
-
-    .lc-detail.visible {
-      display: block;
-    }
-
-    .lc-detail-title {
-      font-family: var(--font-display);
-      font-size: 36px;
-      color: var(--orange);
-      margin-bottom: 12px;
-    }
-
-    .lc-detail-desc {
-      font-size: 15px;
-      color: rgba(255, 255, 255, 0.45);
-      line-height: 1.8;
-    }
-
-    /* HOW IT WORKS */
-    .how-section {
-      background: var(--off);
-      padding: 72px 48px;
-      border-bottom: 4px solid var(--black);
-    }
-
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-      border: 2px solid var(--black);
-      margin-top: 48px;
-    }
-
-    .step {
-      padding: 32px 28px;
-      border-right: 1px solid var(--black);
-    }
-
-    .step:last-child {
-      border-right: none;
-    }
-
-    .step-num {
-      font-family: var(--font-display);
-      font-size: 80px;
-      color: rgba(0, 0, 0, 0.06);
-      line-height: 1;
-      margin-bottom: 14px;
-    }
-
-    .step-title {
-      font-family: var(--font-mono);
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--black);
-      margin-bottom: 10px;
-      letter-spacing: 0.04em;
-    }
-
-    .step-desc {
-      font-size: 14px;
-      color: rgba(0, 0, 0, 0.5);
-      line-height: 1.7;
-    }
-
-    /* ABOUT */
-    .about-section {
-      padding: 72px 48px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      border-bottom: 4px solid var(--black);
-      align-items: center;
-      background: var(--white);
-    }
-
-    .about-title {
-      font-family: var(--font-display);
-      font-size: 88px;
-      line-height: 0.95;
-      color: var(--black);
-      margin-bottom: 28px;
-    }
-
-    .about-title span {
-      color: var(--orange);
-    }
-
-    .about-body {
-      font-size: 16px;
-      color: rgba(0, 0, 0, 0.6);
-      line-height: 1.8;
-      margin-bottom: 18px;
-    }
-
-    .about-author {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      color: rgba(0, 0, 0, 0.4);
-      border-top: 1.5px solid rgba(0, 0, 0, 0.1);
-      padding-top: 20px;
-      margin-top: 28px;
-      line-height: 2;
-    }
-
-    .about-author strong {
-      color: var(--black);
-    }
-
-    .about-author a {
-      color: var(--orange);
-      text-decoration: none;
-    }
-
-    .about-right {
-      background: var(--black);
-      padding: 40px;
-      border-left: 4px solid var(--orange);
-    }
-
-    .about-right-label {
+    .drawer-sec-title {
       font-family: var(--font-mono);
       font-size: 11px;
-      color: rgba(255, 102, 0, 0.4);
-      letter-spacing: 0.12em;
-      margin-bottom: 20px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
+      margin-top: 24px;
+      font-weight: 700;
     }
 
-    .readme-line {
+    .drawer-sec-title:first-child {
+      margin-top: 0;
+    }
+
+    .drawer-code-block {
+      background: #05080e;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 14px;
       font-family: var(--font-mono);
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.45);
-      line-height: 2.2;
+      font-size: 12.5px;
+      color: #cbd5e1;
+      margin-bottom: 10px;
+      word-break: break-all;
     }
 
-    .readme-line .comment {
-      color: rgba(255, 102, 0, 0.35);
+    /* LIFECYCLE TIMELINE */
+    .lifecycle-container {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+      margin-bottom: 30px;
     }
 
-    .readme-line .cmd {
-      color: var(--orange);
+    .phase-tile {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 20px 14px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s;
     }
 
-    .readme-line .flag {
-      color: rgba(255, 255, 255, 0.7);
+    .phase-tile.active, .phase-tile:hover {
+      border-color: var(--primary);
+      background: rgba(99, 102, 241, 0.12);
+      transform: translateY(-2px);
+    }
+
+    .phase-index {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-bottom: 6px;
+    }
+
+    .phase-name {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .phase-details-box {
+      background: #090d16;
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 30px;
+      min-height: 120px;
+    }
+
+    .phase-det-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .phase-det-desc {
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.7;
     }
 
     /* FOOTER */
     footer {
-      background: var(--orange);
-      padding: 40px 48px;
+      border-top: 1px solid var(--border-subtle);
+      background: #05070c;
+      padding: 60px 40px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
+      gap: 18px;
     }
 
-    .footer-logo {
+    .footer-brand {
       font-family: var(--font-display);
-      font-size: 40px;
-      color: var(--black);
-    }
-
-    .footer-meta {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      color: rgba(0, 0, 0, 0.5);
-      text-align: right;
-      line-height: 2;
-    }
-
-    .footer-meta a {
-      color: var(--black);
-      text-decoration: none;
+      font-size: 22px;
       font-weight: 700;
+      color: #fff;
     }
 
-    /* ANIMATIONS */
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(28px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .footer-sub {
+      color: var(--text-dim);
+      font-size: 13.5px;
+      max-width: 500px;
     }
 
-    .reveal {
-      opacity: 0;
-      transform: translateY(32px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    ::-webkit-scrollbar {
-      width: 4px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: var(--black);
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: var(--orange);
+    .footer-badge {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: #64748b;
+      padding: 6px 14px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
     }
 
     @media (max-width: 900px) {
-      nav {
-        padding: 0 24px;
-      }
+      .metrics-row { grid-template-columns: repeat(2, 1fr); }
+      .lifecycle-container { grid-template-columns: repeat(3, 1fr); }
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+    }
 
-      .nav-links {
-        display: none;
-      }
-
-      .hero,
-      .skills-section,
-      .trigger-section,
-      .about-section,
-      .lifecycle-section,
-      .how-section {
-        padding: 100px 24px 60px;
-      }
-
-      .hero {
-        padding-top: 110px;
-      }
-
-      .skills-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .skill-card:nth-child(3n) {
-        border-right: 1px solid rgba(0, 0, 0, 0.12);
-      }
-
-      .skill-card:nth-child(2n) {
-        border-right: none;
-      }
-
-      .steps-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .step:nth-child(2) {
-        border-right: none;
-      }
-
-      .about-section {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-
-      .stats-bar {
-        flex-wrap: wrap;
-      }
-
-      .stat-item {
-        flex: 1 1 50%;
-      }
-
-      footer {
-        flex-direction: column;
-        gap: 20px;
-        text-align: center;
-      }
-
-      .footer-meta {
-        text-align: center;
-      }
-
-      .drawer {
-        width: 100%;
-      }
+    @media (max-width: 600px) {
+      .metrics-row { grid-template-columns: 1fr; }
+      .lifecycle-container { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
 
 <body>
+  <div class="bg-grid"></div>
 
+  <!-- NAVIGATION -->
   <nav>
-    <div class="nav-logo">vibe-<span>*</span></div>
+    <a href="#" class="nav-brand">
+      <div class="brand-symbol">V*</div>
+      <div class="brand-name">VIBE-<span>Bro</span></div>
+    </a>
     <div class="nav-links">
-      <a href="#trigger">Try it</a>
-      <a href="#skills">Skills</a>
-      <a href="#lifecycle">Lifecycle</a>
-      <a href="#about">About</a>
+      <a href="#simulator" class="nav-link">Interactive Matrix</a>
+      <a href="#skills" class="nav-link">All 26 Skills</a>
+      <a href="#lifecycle" class="nav-link">Governance Lifecycle</a>
     </div>
-    <a href="https://github.com/padmanabhansb08/VIBE-Bro" class="nav-cta">GitHub →</a>
+    <div class="nav-actions">
+      <a href="https://github.com/padmanabhansb08/VIBE-Bro" target="_blank" rel="noopener" class="btn-github">
+        <svg height="16" width="16" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+        </svg>
+        GitHub Repository
+      </a>
+    </div>
   </nav>
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-eyebrow">Claude Code Skills Framework — Built at BetaCraft</div>
-    <div class="hero-title">vibe-<span class="accent">*</span></div>
-    <div class="hero-subtitle">26 skills. One install. The complete development lifecycle — plan, build, review, test,
-      deploy, hand off.</div>
-    <div class="terminal-block">
-      <div class="terminal-bar">
-        <div class="terminal-dot red"></div>
-        <div class="terminal-dot yellow"></div>
-        <div class="terminal-dot green"></div>
-        <div class="terminal-title">~/.claude/skills</div>
-      </div>
-      <div class="terminal-body">
-        <div class="terminal-line"><span class="prompt">$ </span><span class="cmd" id="typed-cmd"></span><span
-            class="terminal-cursor" id="cursor"></span></div>
-        <div class="terminal-line" id="term-out1" style="display:none"><span class="out">Cloning into
-            '/tmp/vibe-skill'...</span></div>
-        <div class="terminal-line" id="term-out2" style="display:none"><span class="out">Moving 26 skills to
-            ~/.claude/skills/</span></div>
-        <div class="terminal-line" id="term-out3" style="display:none"><span class="success">✓ All 26 vibe-* skills
-            installed. Restart Claude Code.</span></div>
-      </div>
-      <button class="copy-btn" id="copy-btn" onclick="copyInstall()">COPY</button>
+    <div class="badge-pill">
+      <span class="badge-dot"></span>
+      Autonomous Agent Framework
     </div>
-    <div class="hero-tags">
-      <span class="tag">feature:</span>
-      <span class="tag">bug:</span>
-      <span class="tag">deploy:</span>
-      <span class="tag">review:</span>
-      <span class="tag">brainstorm:</span>
-      <span class="tag">design:</span>
-      <span class="tag">handoff:</span>
-      <span class="tag">cost:</span>
-    </div>
-    <div class="hero-deco">26</div>
-  </section>
+    <h1 class="hero-title">
+      Engineering with <span class="gradient-text">Deterministic Precision</span>
+    </h1>
+    <p class="hero-desc">
+      26 coordinated skills covering every phase of high-leverage software execution. Turn raw intent into production-grade architectures, specs, and audited releases.
+    </p>
 
-  <!-- STATS -->
-  <div class="stats-bar">
-    <div class="stat-item"><span class="stat-num">26</span><span class="stat-label">Total skills</span></div>
-    <div class="stat-item"><span class="stat-num w">1</span><span class="stat-label">Install command</span></div>
-    <div class="stat-item"><span class="stat-num">7</span><span class="stat-label">Deploy platforms</span></div>
-    <div class="stat-item"><span class="stat-num w">∞</span><span class="stat-label">Projects shipped</span></div>
-  </div>
+    <!-- INTERACTIVE TERMINAL -->
+    <div class="terminal-wrapper">
+      <div class="terminal-header">
+        <div class="terminal-dots">
+          <div class="t-dot red"></div>
+          <div class="t-dot yellow"></div>
+          <div class="t-dot green"></div>
+        </div>
+        <div class="terminal-title-text">vibe-terminal — install</div>
+        <button class="btn-copy-install" id="copy-btn" onclick="copyInstallCmd()">
+          <span>COPY</span>
+        </button>
+      </div>
+      <div class="terminal-screen">
+        <div class="t-line">
+          <span class="t-prompt">$</span>
+          <span class="t-cmd" id="terminal-type"></span>
+          <span class="t-cursor" id="cursor-elem"></span>
+        </div>
+        <div class="t-log" id="t-step-1" style="display:none;">Cloning into '/tmp/vibe-skill'...</div>
+        <div class="t-log" id="t-step-2" style="display:none;">Deploying 26 skills to ~/.claude/skills/</div>
+        <div class="t-success" id="t-step-3" style="display:none;">✓ All 26 vibe-* skills loaded and ready for execution.</div>
+      </div>
+    </div>
 
-  <!-- TRIGGER DEMO -->
-  <section class="trigger-section" id="trigger">
-    <div class="section-title reveal">TRY A TRIGGER</div>
-    <div class="section-sub">Type any trigger to see which skill fires</div>
-    <div class="trigger-input-wrap">
-      <div class="trigger-prefix">›</div>
-      <input class="trigger-input" id="trigger-input" placeholder="feature: add dark mode..." type="text"
-        autocomplete="off" spellcheck="false">
-      <button class="trigger-go" onclick="matchTrigger()">MATCH →</button>
-    </div>
-    <div class="trigger-chips">
-      <span class="trigger-chip" onclick="setTrigger('feature: add dark mode')">feature: add dark mode</span>
-      <span class="trigger-chip" onclick="setTrigger('bug: login fails on Safari')">bug: login fails on Safari</span>
-      <span class="trigger-chip" onclick="setTrigger('deploy: railway')">deploy: railway</span>
-      <span class="trigger-chip" onclick="setTrigger('brainstorm: I want to build a SaaS')">brainstorm: SaaS idea</span>
-      <span class="trigger-chip" onclick="setTrigger('design: make it look better')">design: make it look better</span>
-      <span class="trigger-chip" onclick="setTrigger('handoff: client')">handoff: client</span>
-      <span class="trigger-chip" onclick="setTrigger('review: phase 1')">review: phase 1</span>
-      <span class="trigger-chip" onclick="setTrigger('cost: show report')">cost: show report</span>
-    </div>
-    <div class="trigger-result" id="trigger-result">
-      <div class="tr-phase" id="tr-phase"></div>
-      <div class="tr-name" id="tr-name"></div>
-      <div class="tr-desc" id="tr-desc"></div>
-      <div class="tr-badge" id="tr-badge"></div>
-    </div>
-    <div class="trigger-no-match" id="trigger-no-match">No skill matches that trigger. Try: feature:, bug:, deploy:,
-      review:, brainstorm:, design:, handoff:, cost:, architect:, test:...</div>
-  </section>
-
-  <!-- SKILLS -->
-  <section class="skills-section" id="skills">
-    <div class="skills-header">
-      <div class="section-title reveal">ALL SKILLS</div>
-      <div class="search-wrap">
-        <input class="skills-search" id="skills-search" placeholder="Search skills..." type="text"
-          oninput="searchSkills(this.value)" autocomplete="off">
-        <button class="search-clear" id="search-clear" onclick="clearSearch()">×</button>
+    <!-- METRICS -->
+    <div class="metrics-row">
+      <div class="metric-card">
+        <span class="metric-val">26</span>
+        <span class="metric-label">Engineered Skills</span>
       </div>
-    </div>
-    <div class="filter-tabs">
-      <button class="filter-tab active" onclick="filterSkills('all',this)">All (26)</button>
-      <button class="filter-tab" onclick="filterSkills('plan',this)">Plan</button>
-      <button class="filter-tab" onclick="filterSkills('build',this)">Build</button>
-      <button class="filter-tab" onclick="filterSkills('design',this)">Design</button>
-      <button class="filter-tab" onclick="filterSkills('ship',this)">Ship</button>
-      <button class="filter-tab" onclick="filterSkills('visibility',this)">Visibility</button>
-      <button class="filter-tab" onclick="filterSkills('close',this)">Close</button>
-    </div>
-    <div class="skills-count" id="skills-count">Showing 26 skills — click any card for details</div>
-    <div class="skills-grid" id="skills-grid">
-      <div class="skill-card" data-cat="plan" data-name="vibe-brainstorm" data-trigger="brainstorm:"
-        data-desc="Comprehensive brainstorming workflow for turning any idea into a clear, validated, buildable brief. Two paths: personal project (8 steps) and client/business project (13 steps). Produces BRIEF.md."
-        data-examples="brainstorm: I want to build a task manager|brainstorm: client project for a booking platform|help me think through my app idea"
-        onclick="openDrawer(this)">
-        <div class="sk-cat">Plan</div>
-        <div class="sk-name">vibe-brainstorm</div>
-        <div class="sk-trigger">brainstorm:</div>
-        <div class="sk-desc">Turn any idea into a clear, validated, buildable brief.</div>
+      <div class="metric-card">
+        <span class="metric-val">100%</span>
+        <span class="metric-label">Spec Grounded</span>
       </div>
-      <div class="skill-card" data-cat="plan" data-name="vibe-architect" data-trigger="architect:"
-        data-desc="Architecture planning workflow for establishing code structure, patterns, and principles before any code is written. Produces ARCHITECTURE.md from a canonical template. Runs after brainstorm: and before new:."
-        data-examples="architect: plan the structure for a Next.js app|architect: what patterns should we use|plan the architecture"
-        onclick="openDrawer(this)">
-        <div class="sk-cat">Plan</div>
-        <div class="sk-name">vibe-architect</div>
-        <div class="sk-trigger">architect:</div>
-        <div class="sk-desc">Plan code structure before writing a single line.</div>
+      <div class="metric-card">
+        <span class="metric-val">7</span>
+        <span class="metric-label">Deploy Platforms</span>
       </div>
-      <div class="skill-card" data-cat="plan" data-name="vibe-agent" data-trigger="agent:"
-        data-desc="Standalone agentic architecture skill. Designs complete multi-agent AI systems — LangGraph, CrewAI, AutoGen, Vercel AI SDK. Produces AGENT_ARCH.md with an interactive topology diagram."
-        data-examples="agent: design a multi-agent research pipeline|agent: build an orchestrator with sub-agents|I want to build an agent"
-        onclick="openDrawer(this)">
-        <div class="sk-cat">Plan</div>
-        <div class="sk-name">vibe-agent</div>
-        <div class="sk-trigger">agent:</div>
-        <div class="sk-desc">Design complete multi-agent AI systems from scratch.</div>
-      </div>
-      <div class="skill-card" data-cat="plan" data-name="vibe-spec-review" data-trigger="spec-review:"
-        data-desc="Spec quality gate — audits planning documents before any code is written. P0 findings are critical gaps that will cause build failures. Triggered automatically by vibe-brainstorm and vibe-new-app."
-        data-examples="spec-review: check the brief|spec-review: is the spec ready to build|review the spec"
-        onclick="openDrawer(this)">
-        <div class="sk-cat">Plan</div>
-        <div class="sk-name">vibe-spec-review</div>
-        <div class="sk-trigger">spec-review:</div>
-        <div class="sk-desc">Audit specs before building. P0 findings block the build.</div>
-      </div>
-      <div class="skill-card" data-cat="build" data-name="vibe-new-app" data-trigger="new:"
-        data-desc="Full spec-driven setup workflow for building a brand new app from scratch. Generates CLAUDE.md and the complete vibe/ folder. Reads BRIEF.md and ARCHITECTURE.md if they exist."
-        data-examples="new: build a SaaS dashboard|new: create a React app with auth|starting a new project"
-        onclick="openDrawer(this)">
-        <div class="sk-cat">Build</div>
-        <div class="sk-name">vibe-new-app</div>
-        <div class="sk-trigger">new:</div>
-        <div class="sk-desc">Build a new app from scratch with full spec setup.</div>
-      </div>
-      <div class="skill-card" data-cat="build" data-name="vibe-add-feature" data-trigger="feature:"
-        data-desc="Full spec-driven workflow for adding a feature to an existing codebase. Creates FEATURE_SPEC.md, FEATURE_PLAN.md, FEATURE_TASKS.md. Checks for existing incomplete features before creating duplicates."
-        data-examples="feature: add dark mode toggle|feature: add Stripe payment integration|I want to add a feature"
-        onclick="openDrawer(this)">
-        <div class="sk-cat">Build</div>
-        <div class="sk-name">vibe-add-feature</div>
-        <div class="sk-trigger">feature:</div>
-        <div class="sk-desc">Add a feature with spec, plan, and task list generated.</div>
-      </div>
-      <div class="skill-card" data-cat="build" data-name="vibe-fix-bug" data-trigger="bug:"
-        data-desc="Full spec-driven workflow for diagnosing and fixing bugs. Three-way severity triage: trivial (3 tasks), environment (runs vibe-doctor), or significant (full BUG_SPEC workflow). Diagnosis always before fix."
-        data-examples="bug: login fails on Safari|bug: infinite loop in data fetch|something is broken"
-        onclick="openDrawer(this)">
-        <div class="sk-cat">Build</div>
-        <div class="sk-name">vibe-fix-bug</div>
-        <div class="sk-trigger">bug:</div>
-        <div class="sk-desc">Diagnose and fix. Three-way triage before any code changes.</div>
-      </div>
-      <div class="skill-card" data-cat="build" data-name="vibe-change-spec" data-trigger="change:"
-        data-desc="Scope change workflow for modifying, adding, or removing requirements mid-build. Assesses impact before touching any file. Updates all affected docs in the correct order."
-        data-examples="change: add user roles to the spec|change: remove the social login feature|I changed my mind about"
-        onclick="openDrawer(this)">
-        <div class="sk-cat">Build</div>
-        <div class="sk-name">vibe-change-spec</div>
-        <div class="sk-trigger">change:</div>
-        <div class="sk-desc">Modify requirements mid-build. Impact assessed first.</div>
-      </div>
-      <div class="skill-card" data-cat="build" data-name="vibe-review" data-trigger="review:"
-        data-desc="Evidence-based code review — mandatory gate after every phase. Acts as Senior Engineer, Architect, and Code Quality Auditor. Every finding backed by file path and line number. No vague feedback."
-        data-examples="review: phase 1|review: is the code ready to ship|code review" onclick="openDrawer(this)">
-        <div class="sk-cat">Build</div>
-        <div class="sk-name">vibe-review</div>
-        <div class="sk-trigger">review:</div>
-        <div class="sk-desc">Mandatory phase gate. Every finding has file + line number.</div>
-      </div>
-      <div class="skill-card" data-cat="build" data-name="vibe-test" data-trigger="test:"
-        data-desc="Blast-radius-aware test generation. Traces every file a change touches, maps the full dependency graph, writes complete test coverage — component, integration, and E2E tests."
-        data-examples="test: write tests for the auth feature|test: add coverage for payment module|write regression tests"
-        onclick="openDrawer(this)">
-        <div class="sk-cat">Build</div>
-        <div class="sk-name">vibe-test</div>
-        <div class="sk-trigger">test:</div>
-        <div class="sk-desc">Blast-radius-aware test generation across the full dep graph.</div>
-      </div>
-      <div class="skill-card" data-cat="design" data-name="vibe-design" data-trigger="design:"
-        data-desc="Frontend design workflow producing non-generic, editorial-quality UI. Reads DESIGN.md for exact brand tokens. Reads ANTI_GENERIC.md to kill SaaS dashboard defaults. Creates separate files per page and component."
-        data-examples="design: make this look better|design: redesign the dashboard|it looks too generic"
-        onclick="openDrawer(this)">
-        <div class="sk-cat">Design</div>
-        <div class="sk-name">vibe-design</div>
-        <div class="sk-trigger">design:</div>
-        <div class="sk-desc">Editorial-quality UI. Reads brand tokens. Kills generic defaults.</div>
-      </div>
-      <div class="skill-card" data-cat="design" data-name="vibe-design-md" data-trigger="design-md:"
-        data-desc="Generates DESIGN.md for any website URL or fetches from a catalog of 55+ pre-built sites. Captures exact hex values, font families, spacing scales, shadow formulas, and component states."
-        data-examples="design-md: generate for linear.app|design-md: fetch for stripe.com|extract design system from URL"
-        onclick="openDrawer(this)">
-        <div class="sk-cat">Design</div>
-        <div class="sk-name">vibe-design-md</div>
-        <div class="sk-trigger">design-md:</div>
-        <div class="sk-desc">Extract design system from any URL. 55+ pre-built catalogs.</div>
-      </div>
-      <div class="skill-card" data-cat="ship" data-name="vibe-e2e" data-trigger="e2e:"
-        data-desc="Full end-to-end UI tests using Playwright against a live URL. Auto-installs Playwright. Video on failure. Two-device parallel flows. Cleanup script removes all test data after suite runs."
-        data-examples="e2e: https://myapp.com|e2e: regenerate tests from spec|run end-to-end tests"
-        onclick="openDrawer(this)">
-        <div class="sk-cat">Ship</div>
-        <div class="sk-name">vibe-e2e</div>
-        <div class="sk-trigger">e2e:</div>
-        <div class="sk-desc">Playwright E2E tests. Video on failure. Auto cleanup.</div>
-      </div>
-      <div class="skill-card" data-cat="ship" data-name="vibe-deploy" data-trigger="deploy:"
-        data-desc="Prepares for deployment to 7 platforms: Railway, Render, Fly.io, Heroku, Vercel, Netlify, GitHub Pages. Detects stack, patches source files, generates platform config, produces DEPLOY.md checklist."
-        data-examples="deploy: railway|deploy: vercel|deploy: github-pages" onclick="openDrawer(this)">
-        <div class="sk-cat">Ship</div>
-        <div class="sk-name">vibe-deploy</div>
-        <div class="sk-trigger">deploy:</div>
-        <div class="sk-desc">Deploy to 7 platforms. Stack detected. Config generated.</div>
-      </div>
-      <div class="skill-card" data-cat="ship" data-name="vibe-perf" data-trigger="perf:"
-        data-desc="Full-stack performance audit — frontend, backend, agentic pipelines, and infrastructure. Measures, scores, compares against previous runs, and writes approved fixes automatically."
-        data-examples="perf: audit the app|perf: this is slow|perf: check Lighthouse score" onclick="openDrawer(this)">
-        <div class="sk-cat">Ship</div>
-        <div class="sk-name">vibe-perf</div>
-        <div class="sk-trigger">perf:</div>
-        <div class="sk-desc">Full-stack performance audit. Tracks scores over time.</div>
-      </div>
-      <div class="skill-card" data-cat="ship" data-name="vibe-parallel" data-trigger="parallel:"
-        data-desc="Parallel task execution using Claude Code subagents. Reads task files, builds dependency waves, detects file conflicts, and spawns tasks as parallel subagents. Size-aware wave splitting."
-        data-examples="parallel: run tasks in parallel|parallel: which tasks can run simultaneously|spawn subagents"
-        onclick="openDrawer(this)">
-        <div class="sk-cat">Ship</div>
-        <div class="sk-name">vibe-parallel</div>
-        <div class="sk-trigger">parallel:</div>
-        <div class="sk-desc">Parallel execution via subagents. Dependency waves detected.</div>
-      </div>
-      <div class="skill-card" data-cat="visibility" data-name="vibe-progress" data-trigger="progress:"
-        data-desc="Displays a live ASCII progress dashboard for the current vibe project. Reads TASKS.md and git log. Shows overall progress, phase gate status, active work, and last git activity. Read-only."
-        data-examples="progress: show progress|show progress|how far along are we" onclick="openDrawer(this)">
-        <div class="sk-cat">Visibility</div>
-        <div class="sk-name">vibe-progress</div>
-        <div class="sk-trigger">progress:</div>
-        <div class="sk-desc">Live ASCII progress dashboard. Read-only, no files modified.</div>
-      </div>
-      <div class="skill-card" data-cat="visibility" data-name="vibe-cost" data-trigger="cost:"
-        data-desc="Tracks token usage and dollar cost per task, session, feature, phase, and total project. Detects 8 waste patterns. Auto-runs at end of every vibe-add-feature and vibe-fix-bug session."
-        data-examples="cost: show report|how much has this cost|what's the spend so far" onclick="openDrawer(this)">
-        <div class="sk-cat">Visibility</div>
-        <div class="sk-name">vibe-cost</div>
-        <div class="sk-trigger">cost:</div>
-        <div class="sk-desc">Token and dollar cost per task, session, and total project.</div>
-      </div>
-      <div class="skill-card" data-cat="visibility" data-name="vibe-ledger" data-trigger="ledger:"
-        data-desc="Generates a full project cost report as a self-contained HTML file from vibe/cost/history.json. Opens automatically in the browser. Tracks spend per session, task, phase, and day."
-        data-examples="ledger: generate report|show cost report|open ledger" onclick="openDrawer(this)">
-        <div class="sk-cat">Visibility</div>
-        <div class="sk-name">vibe-ledger</div>
-        <div class="sk-trigger">ledger:</div>
-        <div class="sk-desc">Visual cost report as self-contained HTML. Opens in browser.</div>
-      </div>
-      <div class="skill-card" data-cat="visibility" data-name="vibe-graph" data-trigger="vibe-graph:"
-        data-desc="Dual-layer dependency graph. DEPENDENCY_GRAPH.json maps file-level relationships. CONCEPT_GRAPH.json maps semantic relationships. graph.html is an interactive visual. Auto-updated via git diff."
-        data-examples="vibe-graph: build|vibe-graph: update|vibe-graph: query" onclick="openDrawer(this)">
-        <div class="sk-cat">Visibility</div>
-        <div class="sk-name">vibe-graph</div>
-        <div class="sk-trigger">vibe-graph:</div>
-        <div class="sk-desc">Dual-layer dependency graph. File-level + semantic concept map.</div>
-      </div>
-      <div class="skill-card" data-cat="visibility" data-name="vibe-doctor" data-trigger="doctor:"
-        data-desc="Environment health check and auto-remediation. Checks node_modules drift, Tailwind mismatches, dotenv load order, Vite HMR config, husky hook permissions, ESLint validity, TypeScript paths."
-        data-examples="doctor: check environment|why won't my app start|fix my environment" onclick="openDrawer(this)">
-        <div class="sk-cat">Visibility</div>
-        <div class="sk-name">vibe-doctor</div>
-        <div class="sk-trigger">doctor:</div>
-        <div class="sk-desc">Environment health check. Auto-remediates where safe.</div>
-      </div>
-      <div class="skill-card" data-cat="visibility" data-name="vibe-mode" data-trigger="vibe-mode:"
-        data-desc="Sets the execution mode — manual or autonomous. In autonomous mode: executes all tasks automatically, uses subagents for independent tasks, auto-runs review after each phase."
-        data-examples="vibe-mode: autonomous|vibe-mode: manual|what mode am I in" onclick="openDrawer(this)">
-        <div class="sk-cat">Visibility</div>
-        <div class="sk-name">vibe-mode</div>
-        <div class="sk-trigger">vibe-mode:</div>
-        <div class="sk-desc">Manual or autonomous execution. Controls how much auto-runs.</div>
-      </div>
-      <div class="skill-card" data-cat="close" data-name="vibe-document" data-trigger="document:"
-        data-desc="Generates complete documentation — inline code docs, README.md, CHANGELOG.md, API reference, and component library docs. Scans all source files and documents everything in one session."
-        data-examples="document: write docs for this project|generate documentation|add JSDoc"
-        onclick="openDrawer(this)">
-        <div class="sk-cat">Close</div>
-        <div class="sk-name">vibe-document</div>
-        <div class="sk-trigger">document:</div>
-        <div class="sk-desc">Full docs — JSDoc, README, CHANGELOG, API ref, component docs.</div>
-      </div>
-      <div class="skill-card" data-cat="close" data-name="vibe-changelog" data-trigger="changelog:"
-        data-desc="Generates two changelog files from git tags. CHANGELOG.md is developer-facing (Keep a Changelog format). CHANGELOG_CLIENT.md is plain English product update style — no task IDs or framework names."
-        data-examples="changelog: generate|changelog: since v1.0" onclick="openDrawer(this)">
-        <div class="sk-cat">Close</div>
-        <div class="sk-name">vibe-changelog</div>
-        <div class="sk-trigger">changelog:</div>
-        <div class="sk-desc">Two changelogs — dev-facing and plain-English client version.</div>
-      </div>
-      <div class="skill-card" data-cat="close" data-name="vibe-handoff" data-trigger="handoff:"
-        data-desc="Complete handoff packages for every transition. Five modes: client, milestone, dev, internal, maintenance. Each produces markdown docs plus a self-contained HTML portal."
-        data-examples="handoff: client|handoff: milestone|handoff: dev|handoff: maintenance" onclick="openDrawer(this)">
-        <div class="sk-cat">Close</div>
-        <div class="sk-name">vibe-handoff</div>
-        <div class="sk-trigger">handoff:</div>
-        <div class="sk-desc">5 handoff modes. Markdown docs + self-contained HTML portal.</div>
-      </div>
-      <div class="skill-card" data-cat="close" data-name="vibe-init" data-trigger="vibe-init"
-        data-desc="Onboards any existing or legacy codebase into the vibe-* framework. Reads actual source files, infers architecture and patterns, generates the full vibe/ folder in a single session."
-        data-examples="vibe-init|onboard this project|add vibe to this repo" onclick="openDrawer(this)">
-        <div class="sk-cat">Close</div>
-        <div class="sk-name">vibe-init</div>
-        <div class="sk-trigger">vibe-init</div>
-        <div class="sk-desc">Onboard any codebase into vibe-*. Single session setup.</div>
-      </div>
-      <div class="no-results" id="no-results">No skills match your search.</div>
-    </div>
-  </section>
-
-  <!-- LIFECYCLE -->
-  <section class="lifecycle-section" id="lifecycle">
-    <div class="section-title reveal">SKILL LIFECYCLE</div>
-    <div class="lifecycle-flow">
-      <div class="lc-phase active" onclick="showLC(0,this)">
-        <div class="lc-num">01</div>
-        <div class="lc-name">Plan</div>
-        <div class="lc-pill">vibe-brainstorm</div>
-        <div class="lc-pill">vibe-architect</div>
-        <div class="lc-pill">vibe-agent</div>
-        <div class="lc-pill">vibe-spec-review</div>
-      </div>
-      <div class="lc-phase" onclick="showLC(1,this)">
-        <div class="lc-num">02</div>
-        <div class="lc-name">Build</div>
-        <div class="lc-pill">vibe-new-app</div>
-        <div class="lc-pill">vibe-add-feature</div>
-        <div class="lc-pill">vibe-fix-bug</div>
-        <div class="lc-pill">vibe-review</div>
-        <div class="lc-pill">vibe-test</div>
-      </div>
-      <div class="lc-phase" onclick="showLC(2,this)">
-        <div class="lc-num">03</div>
-        <div class="lc-name">Design</div>
-        <div class="lc-pill">vibe-design-md</div>
-        <div class="lc-pill">vibe-design</div>
-      </div>
-      <div class="lc-phase" onclick="showLC(3,this)">
-        <div class="lc-num">04</div>
-        <div class="lc-name">Ship</div>
-        <div class="lc-pill">vibe-e2e</div>
-        <div class="lc-pill">vibe-perf</div>
-        <div class="lc-pill">vibe-deploy</div>
-        <div class="lc-pill">vibe-parallel</div>
-      </div>
-      <div class="lc-phase" onclick="showLC(4,this)">
-        <div class="lc-num">05</div>
-        <div class="lc-name">Visibility</div>
-        <div class="lc-pill">vibe-progress</div>
-        <div class="lc-pill">vibe-cost</div>
-        <div class="lc-pill">vibe-ledger</div>
-        <div class="lc-pill">vibe-doctor</div>
-      </div>
-      <div class="lc-phase" onclick="showLC(5,this)">
-        <div class="lc-num">06</div>
-        <div class="lc-name">Close</div>
-        <div class="lc-pill">vibe-document</div>
-        <div class="lc-pill">vibe-changelog</div>
-        <div class="lc-pill">vibe-handoff</div>
-        <div class="lc-pill">vibe-init</div>
-      </div>
-    </div>
-    <div class="lc-detail visible" id="lc-detail">
-      <div class="lc-detail-title" id="lc-title">PLAN</div>
-      <div class="lc-detail-desc" id="lc-desc">Every project starts here. brainstorm: turns a rough idea into a
-        validated brief. architect: establishes code structure before a single line is written. agent: designs
-        multi-agent systems. spec-review: gates the plan — P0 findings block everything downstream.</div>
-    </div>
-  </section>
-
-  <!-- HOW IT WORKS -->
-  <section class="how-section" id="how">
-    <div class="section-title reveal">HOW IT WORKS</div>
-    <div class="steps-grid">
-      <div class="step reveal">
-        <div class="step-num">01</div>
-        <div class="step-title">Install</div>
-        <div class="step-desc">One git clone command. All 26 skills land directly in ~/.claude/skills/. Restart Claude
-          Code and you're ready.</div>
-      </div>
-      <div class="step reveal">
-        <div class="step-num">02</div>
-        <div class="step-title">Trigger</div>
-        <div class="step-desc">Type natural language like <code
-            style="background:var(--orange);color:var(--black);padding:2px 6px;font-size:12px">feature:</code> and
-          Claude reads the right skill automatically.</div>
-      </div>
-      <div class="step reveal">
-        <div class="step-num">03</div>
-        <div class="step-title">Execute</div>
-        <div class="step-desc">Each skill produces structured output — specs, plans, task lists, code — grounded in your
-          actual files. Nothing invented.</div>
-      </div>
-      <div class="step reveal">
-        <div class="step-num">04</div>
-        <div class="step-title">Ship</div>
-        <div class="step-desc">Phase gates enforce quality. Nothing deploys until review passes. Handoff packages for
-          every project transition.</div>
+      <div class="metric-card">
+        <span class="metric-val">0</span>
+        <span class="metric-label">Hallucinations Allowed</span>
       </div>
     </div>
   </section>
 
-  <!-- ABOUT -->
-  <section class="about-section" id="about">
-    <div class="reveal">
-      <div class="about-title">BUILT AT BETA<span>CRAFT</span></div>
-      <div class="about-body">vibe-* is a framework of 26 Claude Code skills covering the complete software development
-        lifecycle — from first idea to client sign-off. Every skill is grounded in real files, produces complete output
-        from a single trigger, and enforces quality gates between phases.</div>
-      <div class="about-body">Built for production AI-assisted development workflows. Used daily at BetaCraft across
-        client projects.</div>
-      <div class="about-author">MIT License</div>
+  <!-- TRIGGER SIMULATOR -->
+  <section class="section-wrap" id="simulator">
+    <div class="section-header">
+      <div class="section-tag">Interactive Dispatcher</div>
+      <h2 class="section-h2">Simulate Intent Triggering</h2>
     </div>
-    <div class="about-right reveal">
-      <div class="about-right-label">~/vibe-skill — install &amp; usage</div>
-      <div class="readme-line"><span class="comment"># clone all 26 skills</span></div>
-      <div class="readme-line"><span class="cmd">git clone</span> vibe-skill.git /tmp/vs</div>
-      <div class="readme-line"><span class="cmd">mv</span> /tmp/vs/vibe-* ~/.claude/skills/</div>
-      <div class="readme-line"><span class="cmd">rm -rf</span> /tmp/vs</div>
-      <div class="readme-line">&nbsp;</div>
-      <div class="readme-line"><span class="comment"># natural language triggers</span></div>
-      <div class="readme-line"><span class="flag">feature:</span> add dark mode toggle</div>
-      <div class="readme-line"><span class="flag">bug:</span> login fails on Safari</div>
-      <div class="readme-line"><span class="flag">deploy:</span> railway</div>
-      <div class="readme-line"><span class="flag">brainstorm:</span> I want to build a SaaS</div>
-      <div class="readme-line"><span class="flag">handoff:</span> client</div>
+
+    <div class="sim-card">
+      <div class="sim-input-box">
+        <span class="sim-prefix">›</span>
+        <input type="text" id="sim-input" class="sim-input" placeholder="Type trigger like 'feature: add auth' or 'deploy: railway'..." autocomplete="off">
+        <button class="sim-btn" onclick="evaluateTrigger()">DISPATCH</button>
+      </div>
+
+      <div class="chips-row">
+        <button class="sim-chip" onclick="quickTrigger('feature: add passkey authentication')">feature: passkey auth</button>
+        <button class="sim-chip" onclick="quickTrigger('architect: distributed event bus')">architect: event bus</button>
+        <button class="sim-chip" onclick="quickTrigger('bug: token refresh race condition')">bug: race condition</button>
+        <button class="sim-chip" onclick="quickTrigger('agent: multi-agent research pipeline')">agent: multi-agent</button>
+        <button class="sim-chip" onclick="quickTrigger('deploy: vercel')">deploy: vercel</button>
+        <button class="sim-chip" onclick="quickTrigger('cost: analyze current session spend')">cost: session spend</button>
+      </div>
+
+      <div class="sim-result" id="sim-result-box">
+        <div class="sim-meta-bar">
+          <div class="sim-skill-name" id="res-skill-name">vibe-add-feature</div>
+          <div class="sim-phase-tag" id="res-phase-tag">Build Phase</div>
+        </div>
+        <div class="sim-skill-desc" id="res-skill-desc">
+          Spec-driven feature workflow. Produces FEATURE_SPEC.md, FEATURE_PLAN.md, and FEATURE_TASKS.md before writing code.
+        </div>
+        <div class="sim-trigger-label" id="res-matched-trigger">Matched Trigger: feature:</div>
+      </div>
     </div>
   </section>
 
+  <!-- SKILLS MATRIX -->
+  <section class="section-wrap" id="skills">
+    <div class="section-header">
+      <div class="section-tag">Capabilities Catalog</div>
+      <h2 class="section-h2">Autonomous Skills Matrix</h2>
+    </div>
+
+    <div class="filter-controls">
+      <div class="filter-pills">
+        <button class="pill-btn active" onclick="applyFilter('all', this)">All (26)</button>
+        <button class="pill-btn" onclick="applyFilter('plan', this)">Plan</button>
+        <button class="pill-btn" onclick="applyFilter('build', this)">Build</button>
+        <button class="pill-btn" onclick="applyFilter('design', this)">Design</button>
+        <button class="pill-btn" onclick="applyFilter('ship', this)">Ship</button>
+        <button class="pill-btn" onclick="applyFilter('visibility', this)">Visibility</button>
+        <button class="pill-btn" onclick="applyFilter('close', this)">Close</button>
+      </div>
+      <div class="search-box">
+        <input type="text" id="skill-search" class="search-input" placeholder="Filter skills by keyword..." oninput="handleSearch(this.value)">
+      </div>
+    </div>
+
+    <div class="skills-grid" id="skills-grid-container">
+      <!-- Populated dynamically via JS -->
+    </div>
+  </section>
+
+  <!-- GOVERNANCE LIFECYCLE -->
+  <section class="section-wrap" id="lifecycle">
+    <div class="section-header">
+      <div class="section-tag">Quality Gates &amp; Governance</div>
+      <h2 class="section-h2">The Complete Execution Pipeline</h2>
+    </div>
+
+    <div class="lifecycle-container">
+      <div class="phase-tile active" onclick="selectPhase(0, this)">
+        <div class="phase-index">PHASE 01</div>
+        <div class="phase-name">Plan</div>
+      </div>
+      <div class="phase-tile" onclick="selectPhase(1, this)">
+        <div class="phase-index">PHASE 02</div>
+        <div class="phase-name">Build</div>
+      </div>
+      <div class="phase-tile" onclick="selectPhase(2, this)">
+        <div class="phase-index">PHASE 03</div>
+        <div class="phase-name">Design</div>
+      </div>
+      <div class="phase-tile" onclick="selectPhase(3, this)">
+        <div class="phase-index">PHASE 04</div>
+        <div class="phase-name">Ship</div>
+      </div>
+      <div class="phase-tile" onclick="selectPhase(4, this)">
+        <div class="phase-index">PHASE 05</div>
+        <div class="phase-name">Visibility</div>
+      </div>
+      <div class="phase-tile" onclick="selectPhase(5, this)">
+        <div class="phase-index">PHASE 06</div>
+        <div class="phase-name">Close</div>
+      </div>
+    </div>
+
+    <div class="phase-details-box">
+      <div class="phase-det-title" id="phase-detail-title">Phase 01: Plan</div>
+      <div class="phase-det-desc" id="phase-detail-desc">
+        Every project starts here. `brainstorm:` transforms rough ideas into validated specifications. `architect:` establishes code patterns. `agent:` specifies multi-agent graphs. `spec-review:` acts as the P0 blocker ensuring zero hallucinated architecture before code is generated.
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer>
-    <div class="footer-logo">vibe-*</div>
-    <div class="footer-meta">MIT License</div>
+    <div class="footer-content">
+      <div class="footer-brand">VIBE-Bro</div>
+      <div class="footer-sub">
+        Deterministic agentic software development framework for Claude Code, Antigravity, and autonomous LLM workflows.
+      </div>
+      <div class="footer-badge">
+        Maintained under MIT License · <a href="https://github.com/padmanabhansb08/VIBE-Bro" style="color:#818cf8;text-decoration:none;">padmanabhansb08/VIBE-Bro</a>
+      </div>
+    </div>
   </footer>
 
-  <!-- DRAWER -->
-  <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
-  <div class="drawer" id="drawer">
+  <!-- DRAWER MODAL -->
+  <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawerModal()"></div>
+  <div class="drawer" id="drawer-panel">
     <div class="drawer-header">
-      <div class="drawer-cat" id="d-cat"></div>
-      <div class="drawer-name" id="d-name"></div>
-      <div class="drawer-trigger" id="d-trigger"></div>
-      <button class="drawer-close" onclick="closeDrawer()">×</button>
+      <div>
+        <div style="font-family:var(--font-mono);font-size:11px;color:var(--accent-cyan);text-transform:uppercase;" id="modal-cat">Plan Phase</div>
+        <div style="font-family:var(--font-display);font-size:22px;font-weight:700;color:#fff;" id="modal-name">vibe-architect</div>
+      </div>
+      <button class="drawer-close" onclick="closeDrawerModal()">×</button>
     </div>
     <div class="drawer-body">
-      <div class="drawer-section-title">What it does</div>
-      <div class="drawer-desc" id="d-desc"></div>
-      <div class="drawer-section-title">Example triggers</div>
-      <div class="drawer-example" id="d-examples"></div>
-      <div class="drawer-section-title">Install all skills</div>
-      <div class="drawer-example">
+      <div class="drawer-sec-title">Core Capability</div>
+      <p style="color:var(--text-muted);font-size:14px;line-height:1.7;" id="modal-desc"></p>
+
+      <div class="drawer-sec-title">Natural Language Triggers</div>
+      <div id="modal-triggers"></div>
+
+      <div class="drawer-sec-title">Quick Installation</div>
+      <div class="drawer-code-block">
         <code>git clone https://github.com/padmanabhansb08/VIBE-Bro.git /tmp/vibe-skill &amp;&amp; mv /tmp/vibe-skill/vibe-* ~/.claude/skills/ &amp;&amp; rm -rf /tmp/vibe-skill</code>
       </div>
     </div>
@@ -1677,170 +1182,431 @@
   <script>
     const INSTALL_CMD = 'git clone https://github.com/padmanabhansb08/VIBE-Bro.git /tmp/vibe-skill && mv /tmp/vibe-skill/vibe-* ~/.claude/skills/ && rm -rf /tmp/vibe-skill';
 
-    const TRIGGERS = [
-      { triggers: ['feature:', 'feature', 'add feature', 'new feature'], skill: 'vibe-add-feature', cat: 'Build', desc: 'Spec-driven feature workflow. Produces FEATURE_SPEC.md, FEATURE_PLAN.md, and FEATURE_TASKS.md before any code is written.', phase: 'Build phase' },
-      { triggers: ['bug:', 'bug', 'fix bug', 'broken', 'issue', 'debug'], skill: 'vibe-fix-bug', cat: 'Build', desc: 'Three-way severity triage. Diagnosis always before the fix. Regression test always before fix code.', phase: 'Build phase' },
-      { triggers: ['deploy:', 'deploy', 'railway', 'vercel', 'render', 'fly', 'heroku', 'netlify', 'github-pages'], skill: 'vibe-deploy', cat: 'Ship', desc: 'Prepares for deployment to 7 platforms. Stack detected automatically. DEPLOY.md checklist generated.', phase: 'Ship phase' },
-      { triggers: ['brainstorm:', 'brainstorm', 'idea', 'i want to build', 'validate', 'thinking about building', 'let\'s plan'], skill: 'vibe-brainstorm', cat: 'Plan', desc: 'Turns any rough idea into a validated, buildable BRIEF.md. Two paths: personal (8 steps) or client project (13 steps).', phase: 'Plan phase' },
-      { triggers: ['design:', 'design', 'make it look', 'ui', 'redesign', 'style', 'polish', 'looks generic'], skill: 'vibe-design', cat: 'Design', desc: 'Editorial-quality frontend UI. Reads DESIGN.md for brand tokens. Anti-generic rules enforced.', phase: 'Design phase' },
-      { triggers: ['handoff:', 'handoff', 'client delivery', 'sign-off', 'hand over'], skill: 'vibe-handoff', cat: 'Close', desc: '5 handoff modes: client, milestone, dev, internal, maintenance. Produces MD docs + self-contained HTML portal.', phase: 'Close phase' },
-      { triggers: ['review:', 'review', 'code review', 'audit', 'quality check'], skill: 'vibe-review', cat: 'Build', desc: 'Mandatory phase gate. Every finding backed by file path and line number. No vague feedback.', phase: 'Build phase' },
-      { triggers: ['cost:', 'cost', 'spend', 'token', 'how much', 'expensive'], skill: 'vibe-cost', cat: 'Visibility', desc: 'Tracks token usage and dollar cost per task, session, feature, phase, and total project.', phase: 'Visibility' },
-      { triggers: ['architect:', 'architect', 'structure', 'architecture', 'patterns'], skill: 'vibe-architect', cat: 'Plan', desc: 'Produces ARCHITECTURE.md covering patterns, structure, and principles before any code is written.', phase: 'Plan phase' },
-      { triggers: ['test:', 'test', 'tests', 'coverage', 'regression'], skill: 'vibe-test', cat: 'Build', desc: 'Blast-radius-aware test generation. Maps the full dependency graph before writing any tests.', phase: 'Build phase' },
-      { triggers: ['agent:', 'agent', 'multi-agent', 'langgraph', 'crewai', 'orchestrator'], skill: 'vibe-agent', cat: 'Plan', desc: 'Designs complete multi-agent AI systems. Produces AGENT_ARCH.md with interactive topology diagram.', phase: 'Plan phase' },
-      { triggers: ['e2e:', 'e2e', 'playwright', 'end-to-end', 'ui test'], skill: 'vibe-e2e', cat: 'Ship', desc: 'Full Playwright E2E tests against a live URL. Video on failure. Cleanup script included.', phase: 'Ship phase' },
-      { triggers: ['perf:', 'perf', 'performance', 'slow', 'lighthouse', 'bundle size'], skill: 'vibe-perf', cat: 'Ship', desc: 'Full-stack performance audit. Measures, scores, compares against previous runs, writes approved fixes.', phase: 'Ship phase' },
-      { triggers: ['progress:', 'progress', 'how far', 'status'], skill: 'vibe-progress', cat: 'Visibility', desc: 'Live ASCII progress dashboard. Reads TASKS.md and git log. Read-only, no files modified.', phase: 'Visibility' },
-      { triggers: ['ledger:', 'ledger', 'cost report'], skill: 'vibe-ledger', cat: 'Visibility', desc: 'Visual cost report as self-contained HTML. Opens in browser automatically.', phase: 'Visibility' },
-      { triggers: ['doctor:', 'doctor', 'env check', 'broken startup'], skill: 'vibe-doctor', cat: 'Visibility', desc: 'Environment health check and auto-remediation. Checks 10+ common failure points.', phase: 'Visibility' },
-      { triggers: ['document:', 'document', 'docs', 'readme', 'jsdoc'], skill: 'vibe-document', cat: 'Close', desc: 'Complete documentation — inline code docs, README, CHANGELOG, API reference, component docs.', phase: 'Close phase' },
-      { triggers: ['changelog:', 'changelog'], skill: 'vibe-changelog', cat: 'Close', desc: 'Two changelogs from git tags — developer-facing and plain-English client version.', phase: 'Close phase' },
-      { triggers: ['change:', 'change', 'modify spec', 'add to scope'], skill: 'vibe-change-spec', cat: 'Build', desc: 'Impact assessed before touching any file. Updates all affected docs in the correct order.', phase: 'Build phase' },
-      { triggers: ['parallel:', 'parallel', 'subagent', 'simultaneous'], skill: 'vibe-parallel', cat: 'Ship', desc: 'Dependency wave builder. Spawns tasks as parallel subagents with conflict detection.', phase: 'Ship phase' },
-      { triggers: ['spec-review:', 'spec-review', 'review spec', 'check brief'], skill: 'vibe-spec-review', cat: 'Plan', desc: 'Spec quality gate. P0 findings block the build. Triggered automatically after brainstorm.', phase: 'Plan phase' },
-      { triggers: ['design-md:', 'design-md', 'extract design', 'design system'], skill: 'vibe-design-md', cat: 'Design', desc: 'Captures complete design system from any URL. 55+ pre-built catalogs.', phase: 'Design phase' },
-      { triggers: ['vibe-mode:', 'vibe-mode', 'autonomous', 'manual mode'], skill: 'vibe-mode', cat: 'Visibility', desc: 'Sets manual or autonomous execution mode. Writes VIBE_MODE to CLAUDE.md.', phase: 'Visibility' },
-      { triggers: ['vibe-graph:', 'vibe-graph', 'dependency graph'], skill: 'vibe-graph', cat: 'Visibility', desc: 'Dual-layer dependency graph. File-level relationships + semantic concept map.', phase: 'Visibility' },
-      { triggers: ['new:', 'new app', 'new project', 'starting a new'], skill: 'vibe-new-app', cat: 'Build', desc: 'Full spec-driven setup for a brand new app. Generates CLAUDE.md and complete vibe/ folder.', phase: 'Build phase' },
-      { triggers: ['vibe-init', 'onboard', 'init the vibe', 'legacy project'], skill: 'vibe-init', cat: 'Close', desc: 'Onboards any existing codebase into the vibe-* framework. Single session, reads everything.', phase: 'Close phase' },
+    const SKILLS_DATA = [
+      {
+        skill: 'vibe-brainstorm',
+        cat: 'plan',
+        trigger: 'brainstorm:',
+        title: 'vibe-brainstorm',
+        shortDesc: 'Turns rough concepts into verified, buildable architectural briefs.',
+        fullDesc: 'Comprehensive brainstorming workflow for converting any product hypothesis into a structured, validated BRIEF.md. Includes rigorous discovery phases for both personal (8 steps) and client/production projects (13 steps).',
+        examples: ['brainstorm: I want to build a distributed task queue', 'brainstorm: client project for real estate booking', 'validate my SaaS concept']
+      },
+      {
+        skill: 'vibe-architect',
+        cat: 'plan',
+        trigger: 'architect:',
+        title: 'vibe-architect',
+        shortDesc: 'Establishes patterns, boundaries, and structure before writing code.',
+        fullDesc: 'Produces ARCHITECTURE.md covering folder structure, module boundaries, data flows, and design patterns. Gates code execution to ensure zero ad-hoc spaghetti patterns.',
+        examples: ['architect: plan structure for a Next.js + FastAPI app', 'architect: what patterns fit high concurrency', 'plan system architecture']
+      },
+      {
+        skill: 'vibe-agent',
+        cat: 'plan',
+        trigger: 'agent:',
+        title: 'vibe-agent',
+        shortDesc: 'Designs complete multi-agent topologies and orchestrators.',
+        fullDesc: 'Generates AGENT_ARCH.md with interactive topology diagrams, state definitions, tool calling policies, and human-in-the-loop triggers for LangGraph, CrewAI, and custom orchestrators.',
+        examples: ['agent: design a multi-agent research pipeline', 'agent: orchestrator with specialized tools', 'agentic rag system']
+      },
+      {
+        skill: 'vibe-spec-review',
+        cat: 'plan',
+        trigger: 'spec-review:',
+        title: 'vibe-spec-review',
+        shortDesc: 'Audits planning specs. P0 issues block downstream execution.',
+        fullDesc: 'Rigorous spec quality gate. Verifies acceptance criteria, ambiguity gaps, API security, and failure modes before any files are generated.',
+        examples: ['spec-review: audit the brief', 'spec-review: verify readiness for build', 'review specifications']
+      },
+      {
+        skill: 'vibe-new-app',
+        cat: 'build',
+        trigger: 'new:',
+        title: 'vibe-new-app',
+        shortDesc: 'Initializes complete spec-driven projects from scratch.',
+        fullDesc: 'Sets up complete project scaffolding, CLAUDE.md guidelines, and the full vibe/ documentation hierarchy from verified briefs and architecture files.',
+        examples: ['new: build a SaaS dashboard with auth', 'new: create a react app with tailwind', 'start new project']
+      },
+      {
+        skill: 'vibe-add-feature',
+        cat: 'build',
+        trigger: 'feature:',
+        title: 'vibe-add-feature',
+        shortDesc: 'Spec-driven feature workflow: Spec → Plan → Tasks → Code.',
+        fullDesc: 'Generates FEATURE_SPEC.md, FEATURE_PLAN.md, and FEATURE_TASKS.md. Checks for existing overlaps before generating code.',
+        examples: ['feature: add OAuth2 with GitHub', 'feature: implement Stripe subscription webhooks', 'add dark mode support']
+      },
+      {
+        skill: 'vibe-fix-bug',
+        cat: 'build',
+        trigger: 'bug:',
+        title: 'vibe-fix-bug',
+        shortDesc: 'Three-way triage: diagnosis always precedes fix code.',
+        fullDesc: 'Triages issues into trivial, environmental, or structural bugs. Mandates writing regression tests before implementing the fix code to prevent recurrence.',
+        examples: ['bug: auth token refresh loop', 'bug: race condition in checkout', 'debug memory spike on worker']
+      },
+      {
+        skill: 'vibe-change-spec',
+        cat: 'build',
+        trigger: 'change:',
+        title: 'vibe-change-spec',
+        shortDesc: 'Assesses impact before modifying requirements mid-build.',
+        fullDesc: 'Calculates blast radius across architecture, tasks, and code before updating planning documents in correct dependency sequence.',
+        examples: ['change: support multi-tenancy in db schema', 'change: switch from REST to tRPC', 'modify scope']
+      },
+      {
+        skill: 'vibe-review',
+        cat: 'build',
+        trigger: 'review:',
+        title: 'vibe-review',
+        shortDesc: 'Phase gate code auditor: all findings backed by file + line.',
+        fullDesc: 'Acts as Senior Engineer and Security Auditor. Scans for anti-patterns, performance regressions, and unhandled edge cases with explicit line citations.',
+        examples: ['review: phase 1 build', 'review: check security and edge cases', 'code review before PR']
+      },
+      {
+        skill: 'vibe-test',
+        cat: 'build',
+        trigger: 'test:',
+        title: 'vibe-test',
+        shortDesc: 'Blast-radius-aware test suite generator across dep graphs.',
+        fullDesc: 'Traces affected dependency graphs and writes unit, integration, and contract tests targeted directly at touched surfaces.',
+        examples: ['test: write regression tests for billing', 'test: coverage for payment service', 'generate test suite']
+      },
+      {
+        skill: 'vibe-design',
+        cat: 'design',
+        trigger: 'design:',
+        title: 'vibe-design',
+        shortDesc: 'Editorial-grade UI design, killing generic template defaults.',
+        fullDesc: 'Applies curated design tokens and typographic scales while strictly enforcing anti-generic rules for rich, modern visual identity.',
+        examples: ['design: elevate landing page typography', 'design: redesign analytics widget', 'make interface feel premium']
+      },
+      {
+        skill: 'vibe-design-md',
+        cat: 'design',
+        trigger: 'design-md:',
+        title: 'vibe-design-md',
+        shortDesc: 'Extracts exact design systems and color palettes from URLs.',
+        fullDesc: 'Analyzes remote URLs or 55+ pre-indexed design libraries to extract exact color hexes, typography scales, elevation shadows, and component states.',
+        examples: ['design-md: linear.app', 'design-md: stripe.com', 'extract design tokens from url']
+      },
+      {
+        skill: 'vibe-deploy',
+        cat: 'ship',
+        trigger: 'deploy:',
+        title: 'vibe-deploy',
+        shortDesc: 'Automated deployment checklists for 7 cloud platforms.',
+        fullDesc: 'Detects stack requirements and configures production manifests for Railway, Vercel, Render, Fly.io, Heroku, Netlify, and GitHub Pages.',
+        examples: ['deploy: railway', 'deploy: vercel', 'deploy: fly.io production checklist']
+      },
+      {
+        skill: 'vibe-e2e',
+        cat: 'ship',
+        trigger: 'e2e:',
+        title: 'vibe-e2e',
+        shortDesc: 'Playwright end-to-end browser automation with failure capture.',
+        fullDesc: 'Sets up multi-device Playwright test suites against target URLs with automatic video and trace capture on assertion failure.',
+        examples: ['e2e: run suite against staging', 'e2e: test checkout flow', 'browser automation test']
+      },
+      {
+        skill: 'vibe-perf',
+        cat: 'ship',
+        trigger: 'perf:',
+        title: 'vibe-perf',
+        shortDesc: 'Full-stack performance audit and automated remediation.',
+        fullDesc: 'Measures bundle sizes, Lighthouse scores, database query indices, and agentic API latencies with actionable patch suggestions.',
+        examples: ['perf: optimize bundle and load time', 'perf: database query audit', 'profile memory footprint']
+      },
+      {
+        skill: 'vibe-parallel',
+        cat: 'ship',
+        trigger: 'parallel:',
+        title: 'vibe-parallel',
+        shortDesc: 'Parallel subagent wave builder with conflict avoidance.',
+        fullDesc: 'Constructs dependency execution waves to spawn independent tasks across simultaneous subagents without git merge conflicts.',
+        examples: ['parallel: run decoupled tasks', 'parallel: identify concurrent wave candidates', 'spawn parallel subagents']
+      },
+      {
+        skill: 'vibe-progress',
+        cat: 'visibility',
+        trigger: 'progress:',
+        title: 'vibe-progress',
+        shortDesc: 'Live ASCII dashboard mapping TASKS.md and git commits.',
+        fullDesc: 'Non-mutating observer skill that displays progress milestones, pending tasks, phase gate status, and recent author activity.',
+        examples: ['progress: show status', 'how far are we in phase 2', 'status dashboard']
+      },
+      {
+        skill: 'vibe-cost',
+        cat: 'visibility',
+        trigger: 'cost:',
+        title: 'vibe-cost',
+        shortDesc: 'Tracks token spend and detects 8 wasteful prompting patterns.',
+        fullDesc: 'Calculates monetary cost per task and detects prompt bloat, redundant tool loops, and inefficient context consumption in real time.',
+        examples: ['cost: current session spend', 'how much have tokens cost today', 'audit token efficiency']
+      },
+      {
+        skill: 'vibe-ledger',
+        cat: 'visibility',
+        trigger: 'ledger:',
+        title: 'vibe-ledger',
+        shortDesc: 'Interactive HTML cost dashboard with drill-down metrics.',
+        fullDesc: 'Compiles JSON cost logs into a standalone client-side HTML financial ledger report and opens it in the default browser.',
+        examples: ['ledger: open cost dashboard', 'generate financial report', 'open ledger']
+      },
+      {
+        skill: 'vibe-graph',
+        cat: 'visibility',
+        trigger: 'vibe-graph:',
+        title: 'vibe-graph',
+        shortDesc: 'Dual-layer dependency graph: file structure + semantic concepts.',
+        fullDesc: 'Renders an interactive interactive network topology of file imports and semantic domain relationships from codebase diffs.',
+        examples: ['vibe-graph: build graph', 'vibe-graph: inspect dependencies', 'map code relationships']
+      },
+      {
+        skill: 'vibe-doctor',
+        cat: 'visibility',
+        trigger: 'doctor:',
+        title: 'vibe-doctor',
+        shortDesc: 'Environment diagnostic and automatic failure repair.',
+        fullDesc: 'Scans package locks, environment variables, TypeScript paths, and daemon ports to fix corrupted local setups.',
+        examples: ['doctor: diagnose why dev server failed', 'fix environment', 'check toolchain health']
+      },
+      {
+        skill: 'vibe-mode',
+        cat: 'visibility',
+        trigger: 'vibe-mode:',
+        title: 'vibe-mode',
+        shortDesc: 'Switches execution between fully autonomous and human-guided.',
+        fullDesc: 'Controls whether the agent pauses for approvals or executes entire task trees autonomously with automated phase reviews.',
+        examples: ['vibe-mode: autonomous', 'vibe-mode: manual', 'check current execution mode']
+      },
+      {
+        skill: 'vibe-document',
+        cat: 'close',
+        trigger: 'document:',
+        title: 'vibe-document',
+        shortDesc: 'Generates complete documentation suites in a single session.',
+        fullDesc: 'Produces comprehensive README.md, typed JSDoc/docstrings, architecture summaries, and API reference documentation from live code.',
+        examples: ['document: generate comprehensive docs', 'document: update README and API references', 'write codebase documentation']
+      },
+      {
+        skill: 'vibe-changelog',
+        cat: 'close',
+        trigger: 'changelog:',
+        title: 'vibe-changelog',
+        shortDesc: 'Dual changelog generation: technical dev log + executive summary.',
+        fullDesc: 'Parses git commits and tags into technical CHANGELOG.md alongside non-technical, client-ready CHANGELOG_CLIENT.md.',
+        examples: ['changelog: generate release summary', 'changelog: since last tag', 'create release notes']
+      },
+      {
+        skill: 'vibe-handoff',
+        cat: 'close',
+        trigger: 'handoff:',
+        title: 'vibe-handoff',
+        shortDesc: 'Client, milestone, and internal handoff deliverables + portal.',
+        fullDesc: 'Compiles runbooks, onboarding checklists, credentials matrices, and a standalone HTML handoff portal for clean delivery.',
+        examples: ['handoff: client final delivery', 'handoff: dev onboarding package', 'generate handoff portal']
+      },
+      {
+        skill: 'vibe-init',
+        cat: 'close',
+        trigger: 'vibe-init',
+        title: 'vibe-init',
+        shortDesc: 'Retrofits any legacy or existing codebase into the framework.',
+        fullDesc: 'Scans any existing repository, reconstructs architecture diagrams, specs, and CLAUDE.md context in a single pass.',
+        examples: ['vibe-init', 'onboard legacy codebase', 'initialize vibe in existing repo']
+      }
     ];
 
-    const LC_DATA = [
-      { title: 'PLAN', desc: 'Every project starts here. brainstorm: turns a rough idea into a validated brief. architect: establishes code structure. agent: designs multi-agent systems. spec-review: gates the plan — P0 findings block everything downstream.' },
-      { title: 'BUILD', desc: 'The core development loop. new-app: sets up the full vibe/ folder. add-feature: spec → plan → tasks → code. fix-bug: three-way triage before any changes. review: mandatory phase gate. test: blast-radius-aware coverage.' },
-      { title: 'DESIGN', desc: 'design-md: captures the exact design system from any URL. design: applies it to produce non-generic, editorial-quality UI. Reads brand tokens, enforces anti-generic rules, creates separate files per page and component.' },
-      { title: 'SHIP', desc: 'e2e: full Playwright tests against live URL. perf: full-stack performance audit — mandatory before deploy. deploy: 7 platforms, stack detected, config generated. parallel: subagent-based parallel execution with dependency waves.' },
-      { title: 'VISIBILITY', desc: 'progress: ASCII dashboard from TASKS.md and git log. cost + ledger: token and dollar tracking at every level. doctor: environment health check and auto-remediation. mode: switch between manual and autonomous execution.' },
-      { title: 'CLOSE', desc: 'document: complete docs in one session. changelog: two versions — developer-facing and plain-English client. handoff: 5 modes producing markdown + self-contained HTML portal. init: onboard any legacy codebase into the framework.' },
+    const LIFECYCLE_DETAILS = [
+      {
+        title: 'Phase 01: Plan',
+        desc: 'Every project starts here. `brainstorm:` converts rough hypotheses into structured briefs. `architect:` establishes design patterns and module boundaries. `agent:` specifies multi-agent graphs. `spec-review:` acts as the P0 blocker ensuring zero hallucinated architecture before code is written.'
+      },
+      {
+        title: 'Phase 02: Build',
+        desc: 'The core development engine. `new-app:` sets up the workspace governance. `add-feature:` enforces Spec → Plan → Tasks → Code execution. `fix-bug:` guarantees triage and regression tests before patches. `review:` and `test:` ensure blast-radius verification before any commit.'
+      },
+      {
+        title: 'Phase 03: Design',
+        desc: '`design-md:` captures exact design systems, color tokens, and elevation scales from any URL or 55+ pre-indexed design benchmarks. `design:` applies these tokens strictly, enforcing anti-generic rules for rich, editorial visual interfaces.'
+      },
+      {
+        title: 'Phase 04: Ship',
+        desc: '`e2e:` runs Playwright browser tests against target environments with failure video recording. `perf:` runs Lighthouse and latency profiling. `deploy:` provides verified manifests for 7 platforms, and `parallel:` orchestrates subagents across dependency waves.'
+      },
+      {
+        title: 'Phase 05: Visibility',
+        desc: '`progress:` renders live ASCII progress dashboards from TASKS.md and git history. `cost:` and `ledger:` provide monetary token auditing and cost reports. `doctor:` repairs broken developer toolchains, while `vibe-mode:` toggles manual or autonomous workflows.'
+      },
+      {
+        title: 'Phase 06: Close',
+        desc: '`document:` builds complete documentation suites. `changelog:` creates separate technical and executive release notes. `handoff:` packages delivery portals and runbooks. `vibe-init:` allows onboarding legacy codebases in a single session.'
+      }
     ];
 
-    function copyInstall() {
-      navigator.clipboard.writeText(INSTALL_CMD).then(() => {
-        const btn = document.getElementById('copy-btn');
-        btn.textContent = 'COPIED ✓';
-        btn.classList.add('copied');
-        setTimeout(() => { btn.textContent = 'COPY'; btn.classList.remove('copied'); }, 2000);
-      });
+    // Render Skills
+    function renderSkills(skills) {
+      const container = document.getElementById('skills-grid-container');
+      container.innerHTML = skills.map(s => `
+        <div class="skill-card" onclick="openDrawerModal('${s.skill}')">
+          <div class="card-top">
+            <span class="card-category">${s.cat}</span>
+            <span class="card-trigger-chip">${s.trigger}</span>
+          </div>
+          <h3 class="card-title">${s.title}</h3>
+          <p class="card-desc">${s.shortDesc}</p>
+          <div class="card-footer">
+            <span>Inspect Spec</span>
+            <span>→</span>
+          </div>
+        </div>
+      `).join('');
     }
 
-    function matchTrigger() {
-      const val = document.getElementById('trigger-input').value.toLowerCase().trim();
-      const result = document.getElementById('trigger-result');
-      const noMatch = document.getElementById('trigger-no-match');
-      if (!val) return;
-      let found = null;
-      for (const item of TRIGGERS) {
-        if (item.triggers.some(t => val.startsWith(t) || val.includes(t))) { found = item; break; }
-      }
-      if (found) {
-        document.getElementById('tr-phase').textContent = found.cat + ' · ' + found.phase;
-        document.getElementById('tr-name').textContent = found.skill;
-        document.getElementById('tr-desc').textContent = found.desc;
-        document.getElementById('tr-badge').textContent = found.triggers[0];
-        result.classList.add('visible');
-        noMatch.classList.remove('visible');
-      } else {
-        result.classList.remove('visible');
-        noMatch.classList.add('visible');
-      }
-    }
+    // Filter Skills
+    let currentFilter = 'all';
+    let currentSearch = '';
 
-    function setTrigger(val) {
-      document.getElementById('trigger-input').value = val;
-      matchTrigger();
-    }
-
-    document.getElementById('trigger-input').addEventListener('keydown', e => { if (e.key === 'Enter') matchTrigger(); });
-
-    function filterSkills(cat, btn) {
-      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    function applyFilter(cat, btn) {
+      currentFilter = cat;
+      document.querySelectorAll('.pill-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      document.getElementById('skills-search').value = '';
-      document.getElementById('search-clear').classList.remove('visible');
-      let count = 0;
-      document.querySelectorAll('.skill-card').forEach(card => {
-        const show = cat === 'all' || card.dataset.cat === cat;
-        card.classList.toggle('hidden', !show);
-        if (show) count++;
+      filterAndRender();
+    }
+
+    function handleSearch(val) {
+      currentSearch = val.toLowerCase().trim();
+      filterAndRender();
+    }
+
+    function filterAndRender() {
+      const filtered = SKILLS_DATA.filter(s => {
+        const matchesCat = currentFilter === 'all' || s.cat === currentFilter;
+        const matchesSearch = !currentSearch || 
+          s.title.toLowerCase().includes(currentSearch) || 
+          s.shortDesc.toLowerCase().includes(currentSearch) || 
+          s.fullDesc.toLowerCase().includes(currentSearch) || 
+          s.trigger.toLowerCase().includes(currentSearch);
+        return matchesCat && matchesSearch;
       });
-      document.getElementById('skills-count').textContent = 'Showing ' + count + ' skills — click any card for details';
-      document.getElementById('no-results').classList.remove('visible');
+      renderSkills(filtered);
     }
 
-    function searchSkills(val) {
-      const q = val.toLowerCase();
-      document.getElementById('search-clear').classList.toggle('visible', val.length > 0);
-      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-      document.querySelector('.filter-tab').classList.add('active');
-      let count = 0;
-      document.querySelectorAll('.skill-card').forEach(card => {
-        const match = !q || card.dataset.name.includes(q) || card.querySelector('.sk-desc').textContent.toLowerCase().includes(q) || card.dataset.cat.toLowerCase().includes(q) || card.dataset.trigger.includes(q);
-        card.classList.toggle('hidden', !match);
-        if (match) count++;
-      });
-      document.getElementById('skills-count').textContent = 'Showing ' + count + ' skills — click any card for details';
-      document.getElementById('no-results').classList.toggle('visible', count === 0);
-    }
+    // Modal Drawer
+    function openDrawerModal(skillName) {
+      const item = SKILLS_DATA.find(s => s.skill === skillName);
+      if (!item) return;
 
-    function clearSearch() {
-      document.getElementById('skills-search').value = '';
-      searchSkills('');
-    }
+      document.getElementById('modal-cat').textContent = item.cat + ' phase';
+      document.getElementById('modal-name').textContent = item.title;
+      document.getElementById('modal-desc').textContent = item.fullDesc;
 
-    function openDrawer(card) {
-      document.getElementById('d-cat').textContent = card.dataset.cat;
-      document.getElementById('d-name').textContent = card.dataset.name;
-      document.getElementById('d-trigger').textContent = card.dataset.trigger;
-      document.getElementById('d-desc').textContent = card.dataset.desc;
-      const examples = card.dataset.examples.split('|');
-      document.getElementById('d-examples').innerHTML = examples.map(e => `<code>${e}</code>`).join('');
-      document.getElementById('drawer').classList.add('open');
-      document.getElementById('drawer-overlay').classList.add('open');
+      const triggerHtml = item.examples.map(ex => `
+        <div class="drawer-code-block"><code>${ex}</code></div>
+      `).join('');
+      document.getElementById('modal-triggers').innerHTML = triggerHtml;
+
+      document.getElementById('drawer-overlay').classList.add('active');
+      document.getElementById('drawer-panel').classList.add('active');
       document.body.style.overflow = 'hidden';
     }
 
-    function closeDrawer() {
-      document.getElementById('drawer').classList.remove('open');
-      document.getElementById('drawer-overlay').classList.remove('open');
+    function closeDrawerModal() {
+      document.getElementById('drawer-overlay').classList.remove('active');
+      document.getElementById('drawer-panel').classList.remove('active');
       document.body.style.overflow = '';
     }
 
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+    // Interactive Trigger Simulator
+    function evaluateTrigger() {
+      const input = document.getElementById('sim-input').value.toLowerCase().trim();
+      if (!input) return;
 
-    function showLC(idx, el) {
-      document.querySelectorAll('.lc-phase').forEach(p => p.classList.remove('active'));
-      el.classList.add('active');
-      document.getElementById('lc-title').textContent = LC_DATA[idx].title;
-      document.getElementById('lc-desc').textContent = LC_DATA[idx].desc;
-      document.getElementById('lc-detail').classList.add('visible');
-    }
+      let found = null;
+      for (const s of SKILLS_DATA) {
+        if (input.startsWith(s.trigger) || input.includes(s.trigger.replace(':', '')) || s.examples.some(ex => input.includes(ex.toLowerCase()))) {
+          found = s;
+          break;
+        }
+      }
 
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    const CMD = INSTALL_CMD;
-    let ci = 0;
-    const typedEl = document.getElementById('typed-cmd');
-    const cursorEl = document.getElementById('cursor');
-    function typeChar() {
-      if (ci < CMD.length) {
-        typedEl.textContent += CMD[ci++];
-        setTimeout(typeChar, ci < 8 ? 80 : Math.random() * 35 + 18);
+      const box = document.getElementById('sim-result-box');
+      if (found) {
+        document.getElementById('res-skill-name').textContent = found.title;
+        document.getElementById('res-phase-tag').textContent = found.cat + ' phase';
+        document.getElementById('res-skill-desc').textContent = found.fullDesc;
+        document.getElementById('res-matched-trigger').textContent = 'Dispatched via trigger: ' + found.trigger;
+        box.classList.add('active');
       } else {
-        cursorEl.style.display = 'none';
-        setTimeout(() => {
-          document.getElementById('term-out1').style.display = 'block';
-          setTimeout(() => {
-            document.getElementById('term-out2').style.display = 'block';
-            setTimeout(() => { document.getElementById('term-out3').style.display = 'block'; }, 700);
-          }, 500);
-        }, 350);
+        document.getElementById('res-skill-name').textContent = 'Default Agent Dispatch';
+        document.getElementById('res-phase-tag').textContent = 'General Purpose';
+        document.getElementById('res-skill-desc').textContent = 'No specialized skill triggered. Available triggers include feature:, bug:, architect:, agent:, deploy:, cost:, review:...';
+        document.getElementById('res-matched-trigger').textContent = 'Fallback Mode';
+        box.classList.add('active');
       }
     }
-    setTimeout(typeChar, 1000);
+
+    function quickTrigger(val) {
+      document.getElementById('sim-input').value = val;
+      evaluateTrigger();
+    }
+
+    document.getElementById('sim-input').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') evaluateTrigger();
+    });
+
+    // Lifecycle switcher
+    function selectPhase(idx, el) {
+      document.querySelectorAll('.phase-tile').forEach(p => p.classList.remove('active'));
+      el.classList.add('active');
+      document.getElementById('phase-detail-title').textContent = LIFECYCLE_DETAILS[idx].title;
+      document.getElementById('phase-detail-desc').textContent = LIFECYCLE_DETAILS[idx].desc;
+    }
+
+    // Terminal typing animation
+    let typeIdx = 0;
+    const typeTarget = document.getElementById('terminal-type');
+    const cursor = document.getElementById('cursor-elem');
+
+    function animateTyping() {
+      if (typeIdx < INSTALL_CMD.length) {
+        typeTarget.textContent += INSTALL_CMD[typeIdx++];
+        setTimeout(animateTyping, typeIdx < 8 ? 60 : Math.random() * 25 + 12);
+      } else {
+        cursor.style.display = 'none';
+        setTimeout(() => {
+          document.getElementById('t-step-1').style.display = 'block';
+          setTimeout(() => {
+            document.getElementById('t-step-2').style.display = 'block';
+            setTimeout(() => {
+              document.getElementById('t-step-3').style.display = 'block';
+            }, 500);
+          }, 400);
+        }, 300);
+      }
+    }
+
+    function copyInstallCmd() {
+      navigator.clipboard.writeText(INSTALL_CMD).then(() => {
+        const btn = document.getElementById('copy-btn');
+        btn.innerHTML = '<span>COPIED ✓</span>';
+        setTimeout(() => {
+          btn.innerHTML = '<span>COPY</span>';
+        }, 2200);
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeDrawerModal();
+    });
+
+    // Init
+    window.addEventListener('DOMContentLoaded', () => {
+      renderSkills(SKILLS_DATA);
+      setTimeout(animateTyping, 800);
+    });
   </script>
 </body>
 
